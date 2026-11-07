@@ -1,0 +1,22 @@
+# Scales the api on CPU, as section 4.1 asks. CPU % is usage / requests.cpu, so the api
+# MUST set requests.cpu (it does), or this reads <unknown>/70%. ENGINEERING-NOTES Q3 says
+# why CPU is the wrong signal for a generation service and what should replace it.
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: api
+  namespace: rahbar
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: api
+  minReplicas: 3
+  maxReplicas: 8
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70

@@ -1,0 +1,183 @@
+# CI: every pull request to main and every push to dev (section 6).
+# lint -> test -> manifests  (fast feedback), then build -> scan and build -> e2e-eval.
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [dev]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.12"
+  KUSTOMIZE_VERSION: "5.4.3"
+  KUBECONFORM_VERSION: "0.6.7"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+      - name: ruff
+        run: ruff check api indexer eval corpus
+      - name: mypy
+        run: |
+          (cd api && mypy app)
+          (cd indexer && mypy pipeline)
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - name: OCR system packages (the image-only PDF test needs them)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends tesseract-ocr poppler-utils
+      - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt pytest-cov fakeredis
+      - name: pytest api (stub provider, no network, no model), coverage >= 60%
+        working-directory: api
+        env: {RETRIEVER: stub, LLM_PROVIDER: stub}
+        run: pytest -q --cov=app --cov-report=term --cov-fail-under=60
+      - name: pytest indexer, coverage >= 60%
+        working-directory: indexer
+        run: pytest -q --cov=pipeline --cov-report=term --cov-fail-under=60
+
+  manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install kustomize and kubeconform
+        run: |
+          curl -sSL "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" | tar xz -C /usr/local/bin
+          curl -sSL "https://github.com/yannh/kubeconform/releases/download/v${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" | tar xz -C /usr/local/bin
+      - name: kustomize build | kubeconform -strict (every overlay)
+        run: |
+          for overlay in prod dev ci; do
+            echo "== $overlay"
+            kustomize build "k8s/overlays/$overlay" | kubeconform -strict -summary -kubernetes-version 1.31.0
+          done
+
+  build:
+    needs: [lint, test, manifests]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: build api
+        uses: docker/build-push-action@v6
+        with:
+          context: api
+          tags: rahbar-api:dev
+          load: true
+          push: false
+      - name: build ui
+        uses: docker/build-push-action@v6
+        with:
+          context: ui
+          tags: rahbar-ui:dev
+          load: true
+          push: false
+      - name: build indexer (repo-root context; carries eval/fixtures)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: indexer/Dockerfile
+          tags: rahbar-indexer:dev
+          load: true
+          push: false
+      - name: save images for the scan and e2e jobs
+        run: docker save rahbar-api:dev rahbar-ui:dev rahbar-indexer:dev | gzip > images.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: images
+          path: images.tar.gz
+          retention-days: 1
+
+  scan:
+    needs: [build]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [rahbar-api, rahbar-ui, rahbar-indexer]
+    steps:
+      - uses: actions/download-artifact@v4
+        with: {name: images}
+      - run: gunzip -c images.tar.gz | docker load
+      - name: trivy (fail on HIGH/CRITICAL that have a fix)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ${{ matrix.image }}:dev
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+          format: table
+
+  e2e-eval:
+    needs: [build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install httpx==0.28.1 pyyaml==6.0.2
+      - uses: actions/download-artifact@v4
+        with: {name: images}
+      - run: gunzip -c images.tar.gz | docker load
+      - name: create a kind cluster
+        uses: helm/kind-action@v1
+        with:
+          cluster_name: rahbar
+          config: k8s/kind/cluster.yaml
+      - name: load the images just built
+        run: |
+          for i in rahbar-api rahbar-ui rahbar-indexer; do kind load docker-image "$i:dev" --name rahbar; done
+      - name: apply the ci overlay (stub LLM, hash-bow embedder, fixture corpus)
+        run: kubectl apply -k k8s/overlays/ci
+      - name: wait for chroma and redis
+        run: |
+          kubectl -n rahbar rollout status statefulset/chroma --timeout=300s
+          kubectl -n rahbar rollout status deployment/redis --timeout=300s
+      - name: run the indexer Job on the fixture corpus
+        run: |
+          kubectl -n rahbar wait --for=condition=complete job/indexer --timeout=300s \
+            || { kubectl -n rahbar logs job/indexer --tail=100; exit 1; }
+          kubectl -n rahbar logs job/indexer --tail=20
+      - name: wait for the api rollout (readiness needs a non-empty, matching index)
+        run: kubectl -n rahbar rollout status deployment/api --timeout=300s
+      - name: evaluate and enforce the section 5.4 gate
+        run: |
+          kubectl -n rahbar port-forward svc/api 8000:8000 > /tmp/pf.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://localhost:8000/readyz && break; sleep 2; done
+          python eval/run_eval.py --api http://localhost:8000 \
+            --golden eval/fixtures/golden.fixture.yaml \
+            --baseline eval/fixtures/baseline.fixture.json \
+            --out eval/fixtures/results.fixture.json
+      - name: diagnostics on failure
+        if: failure()
+        run: |
+          kubectl -n rahbar get pods,jobs,endpoints -o wide
+          kubectl -n rahbar describe pods | tail -n 80
+          kubectl -n rahbar logs deployment/api --tail=80 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-results
+          path: eval/fixtures/results.fixture.json
+          if-no-files-found: ignore

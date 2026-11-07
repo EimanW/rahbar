@@ -1,0 +1,85 @@
+# The indexer is a Job (ADR 0001): it runs once, writes the index, exits. The api never
+# indexes. Re-index later without a redeploy:
+#   kubectl create job --from=cronjob/reindex manual-reindex-1 -n rahbar
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: indexer
+  namespace: rahbar
+  labels: {app: indexer, app.kubernetes.io/part-of: rahbar}
+spec:
+  backoffLimit: 3                  # a failed run is retried 3 times, then the Job fails
+  activeDeadlineSeconds: 1800
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels: {app: indexer, app.kubernetes.io/part-of: rahbar}
+    spec:
+      restartPolicy: OnFailure
+      serviceAccountName: rahbar-indexer
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      initContainers:
+        # The Job starts as soon as the manifests are applied, often before Chroma is
+        # ready. Wait for its heartbeat (up to 5 min) instead of burning backoffLimit.
+        - name: wait-for-chroma
+          image: rahbar-indexer:dev
+          imagePullPolicy: IfNotPresent
+          command: ["python", "-c"]
+          args:
+            - |
+              import os, time, httpx
+              url = f"http://{os.environ['CHROMA_HOST']}:{os.environ['CHROMA_PORT']}/api/v2/heartbeat"
+              for _ in range(150):
+                  try:
+                      httpx.get(url, timeout=2).raise_for_status(); print("chroma is up"); break
+                  except Exception as exc:
+                      print("waiting for chroma:", type(exc).__name__, flush=True); time.sleep(2)
+              else:
+                  raise SystemExit("chroma never became reachable")
+          envFrom:
+            - configMapRef: {name: rahbar-config}
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      containers:
+        - name: indexer
+          image: rahbar-indexer:dev
+          imagePullPolicy: IfNotPresent
+          args: []                 # the real pipeline; ["--dummy"] writes three fake chunks
+          envFrom:
+            - configMapRef: {name: rahbar-config}
+          # Embedding a 60-page PDF holds far more memory than answering a query: this is
+          # where OOMKilled (exit 137) bites. Size from `kubectl top pods` during a run.
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1536Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - {name: tmp, mountPath: /tmp}   # pdf2image and tesseract write temp files here
+      volumes:
+        - name: tmp
+          emptyDir: {}

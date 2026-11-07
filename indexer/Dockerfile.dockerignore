@@ -1,0 +1,12 @@
+# Build context = repository root (docker build -f indexer/Dockerfile .).
+# Everything is excluded except what the indexer image needs.
+*
+!indexer/requirements.txt
+!indexer/pipeline
+!eval/fixtures
+!corpus/raw
+indexer/pipeline/__pycache__
+**/__pycache__
+**/*.pyc
+.git
+.venv

@@ -1,0 +1,21 @@
+# The e2e-eval CI cluster (kind) and the CD smoke-test cluster: no Ollama, no real corpus.
+# - LLM_PROVIDER=stub: deterministic answers that cite the first retrieved passage
+# - EMBED_MODEL=hash-bow-768: the lexical CI embedder (indexer/pipeline/hashembed.py),
+#   so recall@k is measured on real retrieval with no model download
+# - CORPUS_DIR=/fixtures: the three fixture documents baked into the indexer image
+# - RELEVANCE_FLOOR=0.10: hash-bow similarities are lower than nomic's. Measured locally on the
+#   fixture golden set: the hostel question's best score is 0.00, the weakest answerable
+#   question (f06) scores 0.18. 0.10 sits between them with margin on both sides.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../dev
+patches:
+  - target: {kind: ConfigMap, name: rahbar-config}
+    patch: |-
+      - {op: replace, path: /data/LLM_PROVIDER, value: stub}
+      - {op: replace, path: /data/EMBED_MODEL, value: hash-bow-768}
+      - {op: replace, path: /data/CORPUS_DIR, value: /fixtures}
+      - {op: replace, path: /data/RELEVANCE_FLOOR, value: "0.10"}
+      - {op: replace, path: /data/CHUNK_SIZE, value: "120"}
+      - {op: replace, path: /data/CHUNK_OVERLAP, value: "20"}

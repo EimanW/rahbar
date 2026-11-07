@@ -1,0 +1,145 @@
+# Deny by default, then allow only the paths the architecture needs (section 4.7).
+# Needs a CNI that enforces policy: minikube start --cni=calico (make cluster does).
+#   ui      <- Ingress controller
+#   api     <- Ingress controller, ui
+#   chroma  <- api, indexer      (the ui pod can NOT reach chroma)
+#   redis   <- api
+#   egress: DNS for everyone; api/indexer -> chroma, api -> redis, api/indexer -> Ollama
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: default-deny-all, namespace: rahbar}
+spec:
+  podSelector: {}
+  policyTypes: [Ingress, Egress]
+---
+# Without this, default-deny egress also blocks DNS and every service name stops resolving.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: allow-dns-egress, namespace: rahbar}
+spec:
+  podSelector: {}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: kube-system}
+          podSelector:
+            matchLabels: {k8s-app: kube-dns}
+      ports:
+        - {protocol: UDP, port: 53}
+        - {protocol: TCP, port: 53}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: ui-from-ingress, namespace: rahbar}
+spec:
+  podSelector:
+    matchLabels: {app: ui}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: ingress-nginx}
+      ports:
+        - {protocol: TCP, port: 8080}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: api-from-ingress-and-ui, namespace: rahbar}
+spec:
+  podSelector:
+    matchLabels: {app: api}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: ingress-nginx}
+        - podSelector:
+            matchLabels: {app: ui}
+      ports:
+        - {protocol: TCP, port: 8000}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: chroma-from-api-and-indexer, namespace: rahbar}
+spec:
+  podSelector:
+    matchLabels: {app: chroma}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {app: api}
+        - podSelector:
+            matchLabels: {app: indexer}
+      ports:
+        - {protocol: TCP, port: 8000}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: redis-from-api, namespace: rahbar}
+spec:
+  podSelector:
+    matchLabels: {app: redis}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {app: api}
+      ports:
+        - {protocol: TCP, port: 6379}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: api-egress, namespace: rahbar}
+spec:
+  podSelector:
+    matchLabels: {app: api}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - podSelector:
+            matchLabels: {app: chroma}
+      ports:
+        - {protocol: TCP, port: 8000}
+    - to:
+        - podSelector:
+            matchLabels: {app: redis}
+      ports:
+        - {protocol: TCP, port: 6379}
+    # Ollama on the laptop (ollama-host). The host's IP differs per machine and driver, so
+    # this allows port 11434 to addresses OUTSIDE the cluster only. Tighten it to /32 with
+    # the IP from: minikube ssh "grep host.minikube.internal /etc/hosts"
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except: [10.0.0.0/8]
+      ports:
+        - {protocol: TCP, port: 11434}
+    # LLM_PROVIDER=hosted only: HTTPS to the provider
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except: [10.0.0.0/8]
+      ports:
+        - {protocol: TCP, port: 443}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: indexer-egress, namespace: rahbar}
+spec:
+  podSelector:
+    matchLabels: {app: indexer}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - podSelector:
+            matchLabels: {app: chroma}
+      ports:
+        - {protocol: TCP, port: 8000}
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except: [10.0.0.0/8]
+      ports:
+        - {protocol: TCP, port: 11434}

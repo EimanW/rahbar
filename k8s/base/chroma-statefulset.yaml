@@ -1,0 +1,95 @@
+# The vector store. A StatefulSet, not a Deployment (docs/ARCHITECTURE.md): it needs a
+# stable identity (chroma-0) and storage that reattaches to the same pod after a restart,
+# from volumeClaimTemplates. One replica: Chroma's single-node server has no replication
+# protocol, so a second replica would be a second, divergent index.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: chroma
+  namespace: rahbar
+  labels: {app: chroma, app.kubernetes.io/part-of: rahbar}
+spec:
+  serviceName: chroma-headless
+  replicas: 1
+  selector:
+    matchLabels: {app: chroma}
+  template:
+    metadata:
+      labels: {app: chroma, app.kubernetes.io/part-of: rahbar}
+    spec:
+      serviceAccountName: rahbar-chroma
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000          # the PVC is writable by the non-root user
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: chroma
+          image: chromadb/chroma:1.0.12    # same version as chromadb-client==1.0.12
+          imagePullPolicy: IfNotPresent
+          ports:
+            - {name: http, containerPort: 8000}
+          env:
+            - {name: IS_PERSISTENT, value: "TRUE"}
+            - {name: PERSIST_DIRECTORY, value: /data}
+            - {name: ANONYMIZED_TELEMETRY, value: "FALSE"}
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          readinessProbe:
+            httpGet: {path: /api/v2/heartbeat, port: 8000}
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket: {port: 8000}
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - {name: data, mountPath: /data}
+            - {name: tmp, mountPath: /tmp}
+      volumes:
+        - name: tmp
+          emptyDir: {}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources:
+          requests:
+            storage: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chroma-headless        # the StatefulSet's governing Service: chroma-0.chroma-headless
+  namespace: rahbar
+  labels: {app: chroma}
+spec:
+  clusterIP: None
+  selector: {app: chroma}
+  ports:
+    - {name: http, port: 8000, targetPort: 8000}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chroma                 # what the api and indexer use (CHROMA_HOST=chroma)
+  namespace: rahbar
+  labels: {app: chroma}
+spec:
+  type: ClusterIP
+  selector: {app: chroma}
+  ports:
+    - {name: http, port: 8000, targetPort: 8000}

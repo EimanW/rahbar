@@ -1,0 +1,122 @@
+# CD: every push to main (only reachable through a reviewed, green pull request).
+# test -> build-push (Docker Hub, tagged with the commit SHA) -> deploy (ephemeral kind
+# cluster, rollout status, smoke test through the Ingress). Each job `needs:` the last,
+# so an image is never published from code that failed its tests.
+name: cd
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cd-main
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends tesseract-ocr poppler-utils
+      - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt pytest-cov fakeredis
+      - run: ruff check api indexer eval corpus
+      - name: pytest (stub provider)
+        run: |
+          (cd api && RETRIEVER=stub LLM_PROVIDER=stub pytest -q --cov=app --cov-fail-under=60)
+          (cd indexer && pytest -q --cov=pipeline --cov-fail-under=60)
+
+  build-push:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: log in to Docker Hub (access token from GitHub Secrets, never a password)
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: push api
+        uses: docker/build-push-action@v6
+        with:
+          context: api
+          push: true
+          tags: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rahbar-api:${{ github.sha }}
+      - name: push ui
+        uses: docker/build-push-action@v6
+        with:
+          context: ui
+          push: true
+          tags: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rahbar-ui:${{ github.sha }}
+      - name: push indexer
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: indexer/Dockerfile
+          push: true
+          tags: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/rahbar-indexer:${{ github.sha }}
+
+  deploy:
+    needs: [build-push]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      REGISTRY_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: install kustomize
+        run: curl -sSL "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz" | tar xz -C /usr/local/bin
+      - name: ephemeral cluster
+        uses: helm/kind-action@v1
+        with:
+          cluster_name: rahbar
+          config: k8s/kind/cluster.yaml
+      - name: ingress-nginx controller for kind
+        run: |
+          kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.3/deploy/static/provider/kind/deploy.yaml
+          kubectl -n ingress-nginx wait --for=condition=ready pod -l app.kubernetes.io/component=controller --timeout=180s
+      - name: pin the SHA-tagged images (never :latest)
+        run: |
+          for overlay in prod ci; do
+            (cd "k8s/overlays/$overlay" && kustomize edit set image \
+              "rahbar-api=docker.io/${REGISTRY_USER}/rahbar-api:${GITHUB_SHA}" \
+              "rahbar-ui=docker.io/${REGISTRY_USER}/rahbar-ui:${GITHUB_SHA}" \
+              "rahbar-indexer=docker.io/${REGISTRY_USER}/rahbar-indexer:${GITHUB_SHA}")
+          done
+          kustomize build k8s/overlays/prod | grep "image:" | sort -u
+      # The prod overlay needs Ollama on a laptop, which a CI runner does not have, so the
+      # ephemeral cluster runs the ci overlay (stub LLM, fixture corpus) with the SAME
+      # published images. What is proven: the pushed images pull, start, index and serve.
+      - name: deploy the published images
+        run: kubectl apply -k k8s/overlays/ci
+      - name: wait for the indexer Job and the rollout
+        run: |
+          kubectl -n rahbar rollout status statefulset/chroma --timeout=300s
+          kubectl -n rahbar wait --for=condition=complete job/indexer --timeout=300s
+          kubectl -n rahbar rollout status deployment/api --timeout=300s
+          kubectl -n rahbar rollout status deployment/ui --timeout=180s
+          kubectl -n rahbar get pods -o wide
+      - name: smoke test through the Ingress
+        run: |
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /tmp/ask.json -w '%{http_code}' -X POST http://localhost/api/ask \
+              -H 'Host: rahbar.local' -H 'Content-Type: application/json' \
+              -d '{"question": "When is a student placed on academic warning?"}') || true
+            [ "$code" = "200" ] && break; sleep 3
+          done
+          cat /tmp/ask.json; echo
+          python3 -c "import json; r=json.load(open('/tmp/ask.json')); assert r['answered_from_context'] and r['citations'], r"
+          curl -sf -H 'Host: rahbar.local' http://localhost/ | grep -qi rahbar
+          echo "deployed ${GITHUB_SHA}"
+      - name: diagnostics on failure
+        if: failure()
+        run: |
+          kubectl -n rahbar get pods,jobs,endpoints,ingress -o wide
+          kubectl -n rahbar logs deployment/api --tail=80 || true

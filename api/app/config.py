@@ -1,0 +1,82 @@
+"""Runtime configuration, read once from environment variables.
+
+On the cluster these variables come from your ConfigMap and Secret (section 4.1).
+Nothing here is baked into the image, so one image runs in every environment.
+Add your own keys (relevance floor, cache settings, ...) the same way.
+"""
+
+from __future__ import annotations
+
+import os
+from dataclasses import dataclass, field
+
+
+def _int(name: str, default: int) -> int:
+    return int(os.environ.get(name, default))
+
+
+def _float(name: str, default: float) -> float:
+    return float(os.environ.get(name, default))
+
+
+@dataclass(frozen=True)
+class Settings:
+    # Which implementations to load. "stub" needs no cluster, no model, no network.
+    retriever: str = "stub"          # RETRIEVER: stub | chroma
+    llm_provider: str = "stub"       # LLM_PROVIDER: stub | ollama-host | ollama-incluster | hosted
+
+    # The embedding pin (section 4.4). The indexer reads the same ConfigMap key.
+    embed_model: str = "nomic-embed-text"
+
+    # Vector store
+    chroma_host: str = "chroma"
+    chroma_port: int = 8000
+    collection: str = "rahbar"
+
+    # Retrieval and generation
+    top_k: int = 5
+    temperature: float = 0.2
+    llm_model: str = "llama3.2:3b"
+    ollama_url: str = "http://host.minikube.internal:11434"
+    hosted_base_url: str = ""        # e.g. an OpenAI-compatible endpoint
+    llm_api_key: str = field(default="", repr=False)   # from the Secret; never log it
+
+    # Honesty and cache (sections 3.3, 3.4). Values come from the ConfigMap; see
+    # docs/PIPELINE.md for how each one was measured.
+    relevance_floor: float = 0.50    # RELEVANCE_FLOOR: below this best score, abstain
+    cache_threshold: float = 0.95    # CACHE_THRESHOLD: cosine for a semantic cache hit
+    redis_host: str = ""             # REDIS_HOST: empty disables the cache (tests, make dev)
+    redis_port: int = 6379
+    cache_ttl_seconds: int = 86400   # CACHE_TTL_SECONDS: entries also expire with the index
+    llm_timeout: float = 120.0       # LLM_TIMEOUT: seconds for one model call
+    num_ctx: int = 8192              # NUM_CTX: Ollama context window, set explicitly
+    # FILTER_SUPERSEDED=false only to reproduce failure stage E in docs/FAILURE-ANALYSIS.md
+    filter_superseded: bool = True
+
+    log_level: str = "INFO"
+
+
+def get_settings() -> Settings:
+    return Settings(
+        retriever=os.environ.get("RETRIEVER", "stub"),
+        llm_provider=os.environ.get("LLM_PROVIDER", "stub"),
+        embed_model=os.environ.get("EMBED_MODEL", "nomic-embed-text"),
+        chroma_host=os.environ.get("CHROMA_HOST", "chroma"),
+        chroma_port=_int("CHROMA_PORT", 8000),
+        collection=os.environ.get("CHROMA_COLLECTION", "rahbar"),
+        top_k=_int("TOP_K", 5),
+        temperature=_float("TEMPERATURE", 0.2),
+        llm_model=os.environ.get("LLM_MODEL", "llama3.2:3b"),
+        ollama_url=os.environ.get("OLLAMA_URL", "http://host.minikube.internal:11434"),
+        hosted_base_url=os.environ.get("HOSTED_BASE_URL", ""),
+        llm_api_key=os.environ.get("LLM_API_KEY", ""),
+        relevance_floor=_float("RELEVANCE_FLOOR", 0.50),
+        cache_threshold=_float("CACHE_THRESHOLD", 0.95),
+        redis_host=os.environ.get("REDIS_HOST", ""),
+        redis_port=_int("REDIS_PORT", 6379),
+        cache_ttl_seconds=_int("CACHE_TTL_SECONDS", 86400),
+        llm_timeout=_float("LLM_TIMEOUT", 120.0),
+        num_ctx=_int("NUM_CTX", 8192),
+        filter_superseded=os.environ.get("FILTER_SUPERSEDED", "true").lower() != "false",
+        log_level=os.environ.get("LOG_LEVEL", "INFO"),
+    )

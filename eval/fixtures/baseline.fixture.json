@@ -1,0 +1,129 @@
+{
+  "recall@3": 1.0,
+  "recall@5": 1.0,
+  "recall@5_by_type": {
+    "exact": 1.0,
+    "injection": 1.0,
+    "ordinary": 1.0,
+    "version": 1.0
+  },
+  "citation_validity": 1.0,
+  "citations_checked": 5,
+  "abstention_correctness": 1.0,
+  "must_abstain_questions": 1,
+  "false_abstention_rate": 0.0,
+  "expect_string_hit_rate": 0.8,
+  "stale_citation_rate": 0.0,
+  "per_question": [
+    {
+      "id": "f01",
+      "type": "ordinary",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "cached": false,
+      "top_scores": [
+        0.4543,
+        0.1204,
+        0.117,
+        0.0732,
+        0.0
+      ],
+      "seconds": 0.03
+    },
+    {
+      "id": "f02",
+      "type": "version",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "cached": false,
+      "top_scores": [
+        0.2317,
+        0.0363,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seconds": 0.01
+    },
+    {
+      "id": "f03",
+      "type": "version",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "cached": false,
+      "top_scores": [
+        0.2212,
+        0.2074,
+        0.0455,
+        0.0396,
+        0.0
+      ],
+      "seconds": 0.01
+    },
+    {
+      "id": "f04",
+      "type": "exact",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "cached": false,
+      "top_scores": [
+        0.4199,
+        0.0496,
+        0.0353,
+        0.0331,
+        0.0
+      ],
+      "seconds": 0.01
+    },
+    {
+      "id": "f05",
+      "type": "abstain",
+      "recall@3": null,
+      "recall@5": null,
+      "citation_validity": null,
+      "answered_from_context": false,
+      "must_abstain": true,
+      "cached": false,
+      "top_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seconds": 0.01
+    },
+    {
+      "id": "f06",
+      "type": "injection",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "cached": false,
+      "top_scores": [
+        0.1813,
+        0.1134,
+        0.0271,
+        0.0,
+        -0.0311
+      ],
+      "seconds": 0.01
+    }
+  ],
+  "golden": "eval/fixtures/golden.fixture.yaml",
+  "questions": 6
+}

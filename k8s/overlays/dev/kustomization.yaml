@@ -1,0 +1,10 @@
+# minikube on a laptop: images built locally (make images) and loaded with
+# `minikube image load`, so imagePullPolicy stays IfNotPresent and tags are :dev.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+images:
+  - {name: rahbar-api, newTag: dev}
+  - {name: rahbar-ui, newTag: dev}
+  - {name: rahbar-indexer, newTag: dev}

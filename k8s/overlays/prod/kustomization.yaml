@@ -1,0 +1,16 @@
+# What CD deploys. Images come from Docker Hub, tagged with the commit SHA. cd.yml runs
+#   kustomize edit set image rahbar-api=<user>/rahbar-api:<sha> ...
+# before applying, so the tags below are placeholders that are never deployed: there is
+# no :latest anywhere. "What is running?" is answered by the SHA in the image tag.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+images:
+  - {name: rahbar-api, newName: docker.io/DOCKERHUB_USER/rahbar-api, newTag: set-by-cd}
+  - {name: rahbar-ui, newName: docker.io/DOCKERHUB_USER/rahbar-ui, newTag: set-by-cd}
+  - {name: rahbar-indexer, newName: docker.io/DOCKERHUB_USER/rahbar-indexer, newTag: set-by-cd}
+patches:
+  - target: {kind: Deployment, name: api}
+    patch: |-
+      - {op: replace, path: /spec/template/spec/containers/0/imagePullPolicy, value: Always}
