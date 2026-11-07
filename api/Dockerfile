@@ -7,6 +7,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
     ANONYMIZED_TELEMETRY=False
 
+# patch OS packages and the packaging tools themselves (Trivy gate)
+RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/* \
+ && pip install --upgrade pip setuptools wheel
+
 WORKDIR /app
 # dependencies first, so a code change does not reinstall them (layer caching)
 COPY requirements.txt .

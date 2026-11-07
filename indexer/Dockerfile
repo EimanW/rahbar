@@ -15,7 +15,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     ANONYMIZED_TELEMETRY=False
 
 # OCR needs system packages, not only pip packages (section 3.1)
-RUN apt-get update \
+RUN apt-get update && apt-get upgrade -y \
+ && pip install --upgrade pip setuptools wheel \
  && apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-eng poppler-utils \
  && rm -rf /var/lib/apt/lists/*
 

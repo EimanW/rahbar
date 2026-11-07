@@ -29,6 +29,7 @@ spec:
     spec:
       serviceAccountName: rahbar-redis
       automountServiceAccountToken: false
+      enableServiceLinks: false   # no auto CHROMA_PORT=tcp://... env vars (they crash Chroma)
       securityContext:
         runAsNonRoot: true
         runAsUser: 999         # the redis user in the official image
