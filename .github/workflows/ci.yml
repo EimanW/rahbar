@@ -119,13 +119,10 @@ jobs:
         with: {name: images}
       - run: gunzip -c images.tar.gz | docker load
       - name: trivy (fail on HIGH/CRITICAL that have a fix)
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: ${{ matrix.image }}:dev
-          severity: HIGH,CRITICAL
-          ignore-unfixed: true
-          exit-code: "1"
-          format: table
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            aquasec/trivy:0.56.2 image --severity HIGH,CRITICAL --ignore-unfixed \
+            --exit-code 1 --format table ${{ matrix.image }}:dev
 
   e2e-eval:
     needs: [build]
@@ -175,6 +172,10 @@ jobs:
           kubectl -n rahbar get pods,jobs,endpoints -o wide
           kubectl -n rahbar describe pods | tail -n 80
           kubectl -n rahbar logs deployment/api --tail=80 || true
+          kubectl -n rahbar logs statefulset/chroma --tail=80 || true
+          kubectl -n rahbar describe pod chroma-0 | tail -n 40 || true
+          kubectl -n rahbar get pvc || true
+          kubectl -n rahbar get events --sort-by=.lastTimestamp | tail -n 40 || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
