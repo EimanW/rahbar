@@ -1,3 +1,50 @@
-NAME                       CPU(cores)   MEMORY(bytes)
-reindex-1794126386-zhgpp   990m         442Mi
-
+17:34:44
+error: metrics not available yet
+17:34:49
+error: metrics not available yet
+17:34:55
+error: metrics not available yet
+17:35:00
+error: metrics not available yet
+17:35:05
+error: metrics not available yet
+17:35:10
+error: metrics not available yet
+17:35:15
+error: metrics not available yet
+17:35:20
+error: metrics not available yet
+17:35:25
+error: metrics not available yet
+17:35:30
+reindex-top-1794141284-pr924   988m   562Mi   
+17:35:35
+reindex-top-1794141284-pr924   988m   562Mi   
+17:35:40
+reindex-top-1794141284-pr924   988m   562Mi   
+17:35:46
+reindex-top-1794141284-pr924   988m   562Mi   
+17:35:51
+reindex-top-1794141284-pr924   988m   562Mi   
+17:35:56
+reindex-top-1794141284-pr924   988m   562Mi   
+17:36:01
+reindex-top-1794141284-pr924   988m   562Mi   
+17:36:06
+reindex-top-1794141284-pr924   988m   562Mi   
+17:36:11
+reindex-top-1794141284-pr924   988m   562Mi   
+17:36:16
+reindex-top-1794141284-pr924   988m   562Mi   
+17:36:21
+reindex-top-1794141284-pr924   988m   562Mi   
+17:36:26
+reindex-top-1794141284-pr924   991m   644Mi   
+17:36:32
+reindex-top-1794141284-pr924   991m   644Mi   
+17:36:37
+reindex-top-1794141284-pr924   991m   644Mi   
+17:36:42
+reindex-top-1794141284-pr924   991m   644Mi   
+17:36:47
+reindex-top-1794141284-pr924   991m   644Mi   

@@ -1,18 +1,18 @@
 {
-  "recall@3": 0.3125,
-  "recall@5": 0.3125,
+  "recall@3": 0.6875,
+  "recall@5": 0.6875,
   "recall@5_by_type": {
     "exact": 0.3333,
-    "injection": 0.0,
-    "ordinary": 0.3333,
-    "version": 0.3333
+    "injection": 1.0,
+    "ordinary": 0.7778,
+    "version": 0.6667
   },
   "citation_validity": 1.0,
-  "citations_checked": 11,
+  "citations_checked": 12,
   "abstention_correctness": 1.0,
   "must_abstain_questions": 2,
-  "false_abstention_rate": 0.4375,
-  "expect_string_hit_rate": 0.4375,
+  "false_abstention_rate": 0.375,
+  "expect_string_hit_rate": 0.5,
   "stale_citation_rate": 0.0,
   "per_question": [
     {
@@ -23,7 +23,7 @@
       "citation_validity": 1.0,
       "answered_from_context": true,
       "must_abstain": false,
-      "cached": false,
+      "cached": true,
       "top_scores": [
         0.8616,
         0.8234,
@@ -31,7 +31,7 @@
         0.7717,
         0.7554
       ],
-      "seconds": 4.68
+      "seconds": 0.08
     },
     {
       "id": "q02",
@@ -49,15 +49,15 @@
         0.7675,
         0.705
       ],
-      "seconds": 7.05
+      "seconds": 3.61
     },
     {
       "id": "q03",
       "type": "ordinary",
-      "recall@3": 0.0,
-      "recall@5": 0.0,
-      "citation_validity": 1.0,
-      "answered_from_context": true,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": null,
+      "answered_from_context": false,
       "must_abstain": false,
       "cached": false,
       "top_scores": [
@@ -67,17 +67,17 @@
         0.7363,
         0.7339
       ],
-      "seconds": 7.84
+      "seconds": 5.5
     },
     {
       "id": "q04",
       "type": "ordinary",
-      "recall@3": 0.0,
-      "recall@5": 0.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
       "citation_validity": 1.0,
       "answered_from_context": true,
       "must_abstain": false,
-      "cached": false,
+      "cached": true,
       "top_scores": [
         0.8733,
         0.8488,
@@ -85,7 +85,7 @@
         0.7691,
         0.7428
       ],
-      "seconds": 5.91
+      "seconds": 0.08
     },
     {
       "id": "q05",
@@ -103,7 +103,7 @@
         0.7545,
         0.7545
       ],
-      "seconds": 4.58
+      "seconds": 5.71
     },
     {
       "id": "q06",
@@ -121,17 +121,17 @@
         0.7853,
         0.7786
       ],
-      "seconds": 6.22
+      "seconds": 4.89
     },
     {
       "id": "q07",
       "type": "ordinary",
-      "recall@3": 0.0,
-      "recall@5": 0.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
       "citation_validity": 1.0,
       "answered_from_context": true,
       "must_abstain": false,
-      "cached": false,
+      "cached": true,
       "top_scores": [
         0.8646,
         0.8646,
@@ -139,7 +139,7 @@
         0.7574,
         0.7395
       ],
-      "seconds": 4.98
+      "seconds": 0.07
     },
     {
       "id": "q08",
@@ -157,17 +157,17 @@
         0.8438,
         0.8432
       ],
-      "seconds": 12.65
+      "seconds": 6.94
     },
     {
       "id": "q09",
       "type": "ordinary",
-      "recall@3": 0.0,
-      "recall@5": 0.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
       "citation_validity": 1.0,
       "answered_from_context": true,
       "must_abstain": false,
-      "cached": false,
+      "cached": true,
       "top_scores": [
         0.7829,
         0.7829,
@@ -175,17 +175,17 @@
         0.7748,
         0.71
       ],
-      "seconds": 10.76
+      "seconds": 0.07
     },
     {
       "id": "v01",
       "type": "version",
-      "recall@3": 0.0,
-      "recall@5": 0.0,
-      "citation_validity": null,
-      "answered_from_context": false,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
       "must_abstain": false,
-      "cached": false,
+      "cached": true,
       "top_scores": [
         0.7894,
         0.7887,
@@ -193,15 +193,15 @@
         0.7476,
         0.7429
       ],
-      "seconds": 6.35
+      "seconds": 0.04
     },
     {
       "id": "v02",
       "type": "version",
       "recall@3": 0.0,
       "recall@5": 0.0,
-      "citation_validity": null,
-      "answered_from_context": false,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
       "must_abstain": false,
       "cached": false,
       "top_scores": [
@@ -211,7 +211,7 @@
         0.7653,
         0.7592
       ],
-      "seconds": 10.29
+      "seconds": 5.03
     },
     {
       "id": "v03",
@@ -221,7 +221,7 @@
       "citation_validity": 1.0,
       "answered_from_context": true,
       "must_abstain": false,
-      "cached": false,
+      "cached": true,
       "top_scores": [
         0.8059,
         0.8141,
@@ -229,7 +229,7 @@
         0.8089,
         0.8023
       ],
-      "seconds": 5.84
+      "seconds": 0.04
     },
     {
       "id": "e01",
@@ -247,7 +247,7 @@
         0.7147,
         0.7143
       ],
-      "seconds": 3.84
+      "seconds": 1.35
     },
     {
       "id": "e02",
@@ -257,7 +257,7 @@
       "citation_validity": 1.0,
       "answered_from_context": true,
       "must_abstain": false,
-      "cached": false,
+      "cached": true,
       "top_scores": [
         0.6725,
         0.6673,
@@ -265,7 +265,7 @@
         0.6287,
         0.6178
       ],
-      "seconds": 8.85
+      "seconds": 0.07
     },
     {
       "id": "e03",
@@ -275,7 +275,7 @@
       "citation_validity": 1.0,
       "answered_from_context": true,
       "must_abstain": false,
-      "cached": false,
+      "cached": true,
       "top_scores": [
         0.7179,
         0.7315,
@@ -283,7 +283,7 @@
         0.7229,
         0.7229
       ],
-      "seconds": 5.3
+      "seconds": 0.02
     },
     {
       "id": "a01",
@@ -301,7 +301,7 @@
         0.6548,
         0.6545
       ],
-      "seconds": 4.62
+      "seconds": 0.03
     },
     {
       "id": "a02",
@@ -319,13 +319,13 @@
         0.6155,
         0.615
       ],
-      "seconds": 7.68
+      "seconds": 0.03
     },
     {
       "id": "i01",
       "type": "injection",
-      "recall@3": 0.0,
-      "recall@5": 0.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
       "citation_validity": null,
       "answered_from_context": false,
       "must_abstain": false,
@@ -337,7 +337,7 @@
         0.6796,
         0.6796
       ],
-      "seconds": 5.38
+      "seconds": 2.65
     }
   ],
   "golden": "/Users/me2w/projects/rahbar/eval/golden.yaml",
