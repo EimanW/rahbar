@@ -1,0 +1,15 @@
+Semantic cache threshold measurement, 8 Nov 2026
+Model nomic-embed-text via Ollama, query prefix "search_query: " (same as api/app/embedding.py)
+6 paraphrase pairs (must hit), 6 different-question pairs (must not hit)
+
+paraphrase sims: [0.869, 0.936, 0.94, 0.929, 0.809, 0.908]
+different sims:  [0.675, 0.719, 0.928, 0.85, 0.817, 0.876]
+
+| Threshold | True hits (of 6) | False hits (of 6) |
+| 0.90 | 4 | 1 |
+| 0.93 | 2 | 0 |
+| 0.95 | 0 | 0 |
+
+0.90 ruled out by a false hit: "How many grade points is a B+ worth?" vs "How many grade points is a B- worth?" = 0.928
+0.93 is the lowest zero-false-hit value but sits only 0.002 above that pair.
+Shipped 0.94: 0 false hits, 1 true hit (0.940), margin 0.012 over the B+/B- pair.
