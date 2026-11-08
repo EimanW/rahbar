@@ -17,7 +17,6 @@ CS4032 Software Construction & Development, Assignment 02. Course work by Eiman 
 Umm-e-Sulaim.
 
 ![RAHBAR answering a question with a citation](docs/evidence/ui-screenshot.png)
-<!-- TODO(team): save a screenshot of the chat UI answering with a citation at that path -->
 
 ## Architecture
 
