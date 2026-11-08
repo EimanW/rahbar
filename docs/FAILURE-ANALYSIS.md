@@ -8,7 +8,7 @@ below is from those runs. The switches used are real configuration (`OCR`, `CHUN
 `TOP_K`, `EMBED_MODEL`, `FILTER_SUPERSEDED`), so each break is one ConfigMap edit on the cluster.
 
 From the RAG lecture: only F is the model's fault, so check A to E first. Stages D and F need a
-real model and were not run (TODO(team) if you want all six, with Ollama on minikube).
+real model and were not run: this local stack uses the stub provider, so there is no model to break.
 
 ## Stage A · Extraction
 - **What we broke:** `OCR=false`, then indexed an image-only PDF (one page with no text layer;

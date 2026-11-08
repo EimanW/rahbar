@@ -12,9 +12,9 @@ api:          validate -> cache? -> embed -> retrieve (+filter, +exact boost) ->
 
 Where numbers below say **fixture**, they were measured on the CI fixture corpus
 (`eval/fixtures`, 3 short documents) on a local stack: a real Chroma 1.0.12 server, the real
-indexer, the api, `EMBED_MODEL=hash-bow-768`, `LLM_PROVIDER=stub`. Rows marked **TODO(team)**
-must be measured on the real corpus on minikube with `nomic-embed-text`, using
-`scripts/sweep_chunking.sh`; no number below was guessed.
+indexer, the api, `EMBED_MODEL=hash-bow-768`, `LLM_PROVIDER=stub`. Rows marked **real** were
+measured on the real corpus on minikube with `nomic-embed-text` on 8 Nov 2026
+(`scripts/sweep_chunking.sh`, `docs/evidence/`, `eval/`); no number below was guessed.
 
 ## How documents reach the Job
 The indexer image is built from the repository root (`indexer/Dockerfile`) and carries
@@ -35,8 +35,11 @@ minikube, `/fixtures` in the ci overlay). Re-fetching new documents therefore me
 - Tables: `pdfplumber.find_tables()`; the text outside the tables is extracted normally and each
   table is appended as one `| cell | cell |` line per row. HTML pages: headings become
   Markdown headings, `<tr>` rows become `| ... |` lines, nav, header and footer are dropped.
-- **Which documents needed OCR:** the ORIC start-up policy is expected to be the only one.
-  TODO(team): confirm from the Job log line `"msg": "extracted"`, field `ocr_pages`.
+- **Which documents needed OCR:** four of the seven PDFs, not only the ORIC start-up policy.
+  From the Job log (`docs/evidence/indexer-job-log.txt`, line `"msg": "extracted"`, field
+  `ocr_pages`): the Aug 2023 rules 24 of 26 pages (2-25), the ORIC start-up policy all 8 pages,
+  the Jun 2026 handbook 5 of 58 pages (1, 2, 56, 57, 58) and the student handbook 4 of 64 pages
+  (1, 2, 63, 64). The prospectus and both annual reports needed no OCR.
 
 **Before and after, a table.** Measured on `indexer/tests/data/grade-table.pdf` (the clause 2.3
 grade-points layout: a paragraph, then a 4-column table; made with reportlab so the test is
@@ -58,7 +61,16 @@ Building this example also exposed a real bug in our first version: cropping the
 `outside_bbox(table)` cut the last line of the paragraph just above the table ("...GPA and CGPA
 of a student in" lost "every semester."). We now drop only the characters that lie inside a
 table box; `test_pdf_table_becomes_rows_and_the_text_above_it_survives` pins it.
-TODO(team): add one real example from the Annual Report tables after your first Job run.
+**A real example, with its flaw.** Annual Report 2023-24, PDF page 13 (faculty by campus, 8 rows
+x 26 columns), run with `python3 table_example.py corpus/raw/annual-report-2023-24.pdf`. Plain
+`extract_text()` of the table area already gives one readable line per campus, for example
+`Islamabad 19 14 46 16 83 50 8 236`. Our extractor also keeps one line per row, but pdfplumber finds
+26 columns because the merged header cells are spread over several cells, so every row is padded with
+empty cells (`|  | Islamabad |  |  | 19 |  |  | 14 | ...`) and the header cells are not always in
+the same column as the numbers below them (`Prof.` is in column 4, its first value in column 5).
+All the numbers survive and each campus is still one row, but which header belongs to which number
+has to be inferred. For this table the plain text was no worse than our output, and we did not
+change the extractor for it; wide tables with merged headers are a known weakness.
 
 **What we could not recover:** OCR of the scanned policy loses its layout (headers, any table
 borders) and may misread clause numbers; we keep the text and accept that its citations are
@@ -90,7 +102,8 @@ section, never across one. Each chunk starts with `[source | section]`.
 `"msg": "chunking summary"`, field `amplification`. The `[source | section]` prefix and the
 overlap are what push it above 1. Fixture, 120/20: 429 / 427 = **1.005** (sections there are
 shorter than the chunk size, so overlap never triggers). The lecture's example was 150 / 120 =
-1.25. Real corpus: TODO(team) from the Job log.
+1.25. Real corpus: **1.076** (913 chunks; 87,320 original words became 93,990 stored words; chunk
+size 300, overlap 50), from the `"chunking summary"` line in `docs/evidence/indexer-job-log.txt`.
 
 | Size (words) | Overlap (words) | recall@5 | Chunks stored | Corpus |
 | --- | --- | --- | --- | --- |
@@ -98,9 +111,15 @@ shorter than the chunk size, so overlap never triggers). The lecture's example w
 | 60 | 10 | 1.00 | 11 | fixture (amplification 1.005) |
 | 120 | 20 | 1.00 | 11 | fixture (amplification 1.005) |
 | 100, fixed-size, no structure | 0 | 0.00 | 6 | fixture (failure stage B) |
-| 200 | 30 | TODO(team) | TODO(team) | real, `scripts/sweep_chunking.sh` |
-| 300 | 50 | TODO(team) | TODO(team) | real (shipped value in the ConfigMap) |
-| 500 | 80 | TODO(team) | TODO(team) | real |
+| 200 | 30 | 0.6875 | 1028 | real, `scripts/sweep_chunking.sh` (amplification 1.097) |
+| 300 | 50 | 0.6875 | 913 | real (shipped value in the ConfigMap; amplification 1.076) |
+| 500 | 80 | 0.6875 | 838 | real (amplification 1.041) |
+
+Source: `docs/evidence/chunk-sweep.txt`. On this golden set recall@5 does not change with chunk
+size: 0.6875 at all three sizes, and exact-term recall@5 is 0.3333 at all three. So recall cannot
+choose between them; only the number of chunks and the amplification differ (1028 / 913 / 838
+chunks, 1.097 / 1.076 / 1.041). We kept 300/50, the value already in the ConfigMap, because the
+sweep gave no recall evidence that another size is better.
 
 **What the fixture rows show, and what they do not.** Every structure-aware setting scores
 1.00 on the fixture set because its sections are one or two paragraphs long, shorter than any
@@ -143,8 +162,11 @@ point of the best recall@5, because smaller chunks put fewer unrelated sentences
 - **Relevance floor:** if no passage has similarity >= `RELEVANCE_FLOOR`, the api abstains
   without calling the model. Fixture (hash-bow): the hostel question's best score is 0.00 and the
   weakest answerable one is 0.18, so the ci overlay uses 0.10. Real corpus with nomic: the
-  ConfigMap ships 0.50 as a starting point; TODO(team): set it between the highest must-abstain
-  score and the lowest answerable score in `eval/results.json` (`per_question[].top_scores`).
+  ConfigMap ships **0.665**, set between the highest must-abstain best score (a01, 0.6602) and the
+  lowest answerable best score (e02, 0.6725) in `eval/results.json` (`per_question[].top_scores`).
+  The midpoint is about 0.666; the margins are 0.0048 below and 0.0075 above. That is narrow:
+  nomic-embed scores sit in a small band, so abstention currently depends on the model as well
+  as on the floor.
 
 ## Semantic cache
 `api/app/services/cache.py`, ADR 0003. Redis, one hash per `(index_version, embed_model)`.
@@ -153,16 +175,25 @@ namespace changes with `index_version`. Never cached: follow-ups, abstentions, f
 answers with a removed citation.
 
 **Thresholds tried** (rule from the lecture: the lowest threshold with zero false hits).
-TODO(team), with `nomic-embed-text` on minikube: ask pairs that must hit ("What CGPA avoids
-academic warning?" / "minimum CGPA to stay off warning") and pairs that must not ("How many
-semesters can I freeze?" / "How many courses can I take on warning?"), at 0.90, 0.93 and 0.95,
-and record the false hit that rules a value out:
+Measured on 8 Nov 2026 with `nomic-embed-text` on minikube, using the same query prefix as the
+api (`search_query: `): 6 paraphrase pairs that must hit and 6 different-question pairs that
+must not (`docs/evidence/cache-threshold.txt`). Similarities of the paraphrase pairs: 0.869,
+0.936, 0.94, 0.929, 0.809, 0.908; of the different pairs: 0.675, 0.719, 0.928, 0.85, 0.817,
+0.876. The false hit that rules out 0.90 is "How many grade points is a B+ worth?" against
+"How many grade points is a B- worth?" at 0.928:
 
-| Threshold | True hits (of N paraphrase pairs) | False hits (of M different pairs) | Verdict |
+| Threshold | True hits (of 6 paraphrase pairs) | False hits (of 6 different pairs) | Verdict |
 | --- | --- | --- | --- |
-| 0.90 | TODO(team) | TODO(team) | |
-| 0.93 | TODO(team) | TODO(team) | |
-| 0.95 | TODO(team) | TODO(team) | shipped until measured |
+| 0.90 | 4 | 1 | Ruled out: the B+/B- pair is a false hit at 0.928 |
+| 0.93 | 2 | 0 | Lowest value with zero false hits, but only 0.002 above the B+/B- pair |
+| 0.94 (shipped) | 1 | 0 | Zero false hits and a 0.012 margin over the B+/B- pair; the one true hit is a pair listed at 0.94 (rounded to three decimals in the file) |
+| 0.95 | 0 | 0 | No false hits, but no true hits either |
+
+**Why 0.94.** The lecture's rule picks the lowest threshold with zero false hits, which here is
+0.93 (2 of 6 paraphrase pairs hit). But 0.93 sits only 0.002 above the false-hit pair (B+ against
+B- at 0.928), so a small change in the embeddings could turn it into a wrong cached answer. We
+shipped 0.94 for the margin (0.012 over that pair) and accept that only 1 of 6 paraphrase pairs
+hits, so five of the six paraphrase pairs miss the cache. Source: `docs/evidence/cache-threshold.txt`.
 
 (With the fixture's lexical embedder the cache hit on exact repeats, verified: the second eval
 run served 5 of 6 answers from cache; the abstention was correctly not cached.)
@@ -173,8 +204,11 @@ run served 5 of 6 answers from cache; the abstention was correctly not cached.)
   pairs. A retrieved passage matches a golden one when the `source` file is the same and the
   golden `section` is a prefix of the chunk's section, case-insensitive, ignoring a leading
   number on the heading ("Attendance" matches "Attendance Requirements"; "Acceptable Uses"
-  matches "4. Acceptable Uses"). Golden sections were written from the documents, not from
-  retrieved chunks.
+  matches "4. Acceptable Uses"). Golden sections were first written from the documents, not from
+  retrieved chunks. After the first real-corpus run, the section names of q03, q04, q07, q09,
+  v01, e01 and i01 were corrected to the clause-text form the indexer really produces (for
+  example "4.18 A student may request freezing"), and the `expect:` strings of q03, q04, q07
+  and q08 were corrected to the PDF's wording. No question, id, type or source was changed.
 - **Citation validity** = citations that match a retrieved (source, section) / all citations.
   The api already drops invalid citations before responding (`services/citations.py`), so this
   measures that the guard works end to end.
@@ -194,6 +228,8 @@ version (golden `allow_superseded: true` marks the one that does).
 ### Shipped numbers
 - Fixture (CI baseline, `eval/fixtures/baseline.fixture.json`): recall@3 1.00, recall@5 1.00,
   citation validity 1.00, abstention 1.00, stale citations 0.00 (6 questions).
-- Real corpus: `eval/baseline.json` and `eval/results.json`, TODO(team): run
-  `python eval/run_eval.py --api http://<ip> --host rahbar.local --update-baseline` on minikube
-  after the first index, then commit both files.
+- Real corpus (`eval/baseline.json` and `eval/results.json`, run on minikube with the corrected
+  golden set and `RELEVANCE_FLOOR` 0.665): recall@3 0.6875, recall@5 0.6875 (exact 0.3333,
+  injection 1.0, ordinary 0.7778, version 0.6667), citation validity 1.00 (12 citations checked),
+  abstention correctness 1.00 (2 must-abstain questions), false-abstention rate 0.375, expect-string
+  hit rate 0.5, stale-citation rate 0.00 (18 questions).
