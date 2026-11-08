@@ -7,9 +7,9 @@ kind: Kustomization
 resources:
   - ../../base
 images:
-  - {name: rahbar-api, newName: docker.io/DOCKERHUB_USER/rahbar-api, newTag: set-by-cd}
-  - {name: rahbar-ui, newName: docker.io/DOCKERHUB_USER/rahbar-ui, newTag: set-by-cd}
-  - {name: rahbar-indexer, newName: docker.io/DOCKERHUB_USER/rahbar-indexer, newTag: set-by-cd}
+  - {name: rahbar-api, newName: docker.io/manix3/rahbar-api, newTag: set-by-cd}
+  - {name: rahbar-ui, newName: docker.io/manix3/rahbar-ui, newTag: set-by-cd}
+  - {name: rahbar-indexer, newName: docker.io/manix3/rahbar-indexer, newTag: set-by-cd}
 patches:
   - target: {kind: Deployment, name: api}
     patch: |-

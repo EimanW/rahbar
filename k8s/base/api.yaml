@@ -21,6 +21,7 @@ spec:
     spec:
       serviceAccountName: rahbar-api
       automountServiceAccountToken: false
+      enableServiceLinks: false   # no auto CHROMA_PORT=tcp://... env vars (they crash Chroma)
       terminationGracePeriodSeconds: 30
       securityContext:
         runAsNonRoot: true

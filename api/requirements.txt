@@ -1,5 +1,5 @@
 # Pinned: an unpinned dependency is the drift problem from Lecture 04.
-fastapi==0.115.12
+fastapi==0.162.2
 uvicorn==0.34.2
 pydantic==2.11.4
 httpx==0.28.1
