@@ -1,0 +1,10 @@
+| Size (words) | Overlap (words) | recall@3 | recall@5 | exact recall@5 | Chunks stored | Amplification |
+| --- | --- | --- | --- | --- | --- | --- |
+Defaulted container "indexer" out of: indexer, wait-for-chroma (init)
+| 200 | 30 | 0.6875 | 0.6875 | 0.3333 | 1028 | 1.097 |
+Defaulted container "indexer" out of: indexer, wait-for-chroma (init)
+| 300 | 50 | 0.6875 | 0.6875 | 0.3333 | 913 | 1.076 |
+Defaulted container "indexer" out of: indexer, wait-for-chroma (init)
+| 500 | 80 | 0.6875 | 0.6875 | 0.3333 | 838 | 1.041 |
+
+restored CHUNK_SIZE=300 CHUNK_OVERLAP=50; re-index with: make index

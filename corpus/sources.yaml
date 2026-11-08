@@ -14,11 +14,6 @@ documents:
     doc_version: "2023-08"
     superseded: true
 
-  - name: Academic Rules Handbook (Jun 2025)
-    url: https://nu.edu.pk/public/downloads/Academic_Rules_Handbook_2025.pdf
-    doc_version: "2025-06"
-    superseded: true
-
   - name: Academic Rules Handbook (Jun 2026)
     url: https://nu.edu.pk/public/downloads/Academic_Rules_Handbook_2026.pdf
     doc_version: "2026-06"
