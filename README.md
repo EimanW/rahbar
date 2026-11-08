@@ -1,8 +1,8 @@
 # RAHBAR: grounded answers about FAST-NUCES rules, on Kubernetes
 
-[![ci](https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/OWNER/REPO/actions/workflows/ci.yml)
-[![cd](https://github.com/OWNER/REPO/actions/workflows/cd.yml/badge.svg?branch=main)](https://github.com/OWNER/REPO/actions/workflows/cd.yml)
-<!-- replace OWNER/REPO with the GitHub path once the repository exists -->
+[![ci](https://github.com/EimanW/rahbar/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/EimanW/rahbar/actions/workflows/ci.yml)
+[![cd](https://github.com/EimanW/rahbar/actions/workflows/cd.yml/badge.svg?branch=main)](https://github.com/EimanW/rahbar/actions/workflows/cd.yml)
+<!-- replace EimanW/rahbar with the GitHub path once the repository exists -->
 
 A student wants to know whether they can register for a course after failing its prerequisite.
 The answer is in a clause of a university PDF, next to an older edition of the same rules that

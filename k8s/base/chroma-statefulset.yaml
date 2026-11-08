@@ -19,6 +19,7 @@ spec:
     spec:
       serviceAccountName: rahbar-chroma
       automountServiceAccountToken: false
+      enableServiceLinks: false   # no auto CHROMA_PORT=tcp://... env vars (they crash Chroma)
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000

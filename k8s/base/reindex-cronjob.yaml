@@ -22,6 +22,7 @@ spec:
           restartPolicy: OnFailure
           serviceAccountName: rahbar-indexer
           automountServiceAccountToken: false
+          enableServiceLinks: false   # no auto CHROMA_PORT=tcp://... env vars (they crash Chroma)
           securityContext:
             runAsNonRoot: true
             runAsUser: 10001
