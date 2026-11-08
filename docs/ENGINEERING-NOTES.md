@@ -54,8 +54,8 @@ more api pods do not help when the bottleneck is one Ollama on one laptop: scali
 the model servers (`ollama-incluster` replicas, or a hosted provider's rate limit).
 
 ## 4. The indexer's peak memory, its limit, the margin, and the exit code when it is wrong
-The Job's limit is `memory: 1536Mi` with a request of `512Mi` (`k8s/base/indexer-job.yaml:38`
-and `:41`). **Peak: TODO(team).** Measure during a real-corpus run with
+The Job's limit is `memory: 1536Mi` with a request of `512Mi` (`k8s/base/indexer-job.yaml:75` and `:72`;
+the reindex CronJob template repeats them at `k8s/base/reindex-cronjob.yaml:77` and `:74`). **Peak: TODO(team).** Measure during a real-corpus run with
 `watch -n 2 kubectl top pods -n rahbar -l app=indexer` (metrics-server samples about every 15 s,
 so watch the whole run, OCR and embedding included) and save the output to
 `docs/evidence/kubectl-top-indexer.txt`. Then set the limit to about 1.5 x the observed peak
