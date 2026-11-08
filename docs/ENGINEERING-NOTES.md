@@ -101,14 +101,12 @@ passages, and no error appears anywhere. If the dimensions differ, Chroma would 
 query, which shows up as 500s rather than garbage: still an outage.
 
 ## 7. The failure that cost us more than an hour
-TODO(team): this one has to be yours: your symptoms, what you wrongly believed first, and the
-exact command, metric or log line that told you the truth. Candidates from building this that
-fit the shape, if one of them is the one that cost you the time on your laptop:
-- recall@5 stayed at 1.00 with the superseded filter off; the wrong edition was being cited and
-  every gate passed (FAILURE-ANALYSIS stage E). The truth came from the `chunk_ids` in the
-  per-request log line, all starting with `academic-rules-2023-`.
-- "ignore earlier instructions" in the injection question switched the old-version filter on,
-  because the detector matched the bare word "earlier".
-- A NetworkPolicy that blocked DNS (default-deny egress) so every service name stopped
-  resolving; the truth is `kubectl exec ... -- python -c "import socket; socket.gethostbyname('chroma')"`
-  failing while `kubectl get endpoints chroma` is populated.
+The failure that cost us the most time was the CI `e2e-eval` job timing out. The api pods crashed with `Could not connect to a Chroma server`. We first suspected the CI and Trivy setup and looked there, and that was the wrong place.
+
+What showed the real cause was Chroma's own log, not the api's. The api's message only says it cannot reach Chroma, which is a symptom. Chroma's log said `invalid type: found string "tcp://10.96.28.126:8000", expected u16 for key "PORT"`. So Chroma was crashing while reading its own settings, and nothing was listening for the api to connect to.
+
+The cause is a Kubernetes default called service links. For every Service in the namespace, Kubernetes adds environment variables to every pod. Our Service is named `chroma`, so every pod received `CHROMA_PORT=tcp://10.96.28.126:8000`. Chroma treats every `CHROMA_*` variable as its own configuration, so it tried to use that text as its port. A port has to be a number (`u16`, 0 to 65535), so it failed.
+
+The fix is `enableServiceLinks: false` in the pod spec of every workload: `k8s/base/api.yaml:24`, `k8s/base/chroma-statefulset.yaml:22`, `k8s/base/indexer-job.yaml:21`, `k8s/base/reindex-cronjob.yaml:25`, `k8s/base/ui.yaml:17` and `k8s/base/redis.yaml:32`. It went in with commit `4648989`, which also carried the CVE patches. Nothing depended on the injected variables, because the api finds Chroma by name through `CHROMA_HOST` and `CHROMA_PORT` in the ConfigMap (`k8s/base/configmap.yaml:16-17`).
+
+The lesson: when a dependency will not start, read the dependency's own log first, before reworking the pipeline that reported the symptom. A second lesson is that a Service name can collide with a program's own environment-variable prefix.
