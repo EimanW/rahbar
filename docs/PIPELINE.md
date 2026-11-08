@@ -173,8 +173,11 @@ run served 5 of 6 answers from cache; the abstention was correctly not cached.)
   pairs. A retrieved passage matches a golden one when the `source` file is the same and the
   golden `section` is a prefix of the chunk's section, case-insensitive, ignoring a leading
   number on the heading ("Attendance" matches "Attendance Requirements"; "Acceptable Uses"
-  matches "4. Acceptable Uses"). Golden sections were written from the documents, not from
-  retrieved chunks.
+  matches "4. Acceptable Uses"). Golden sections were first written from the documents, not from
+  retrieved chunks. After the first real-corpus run, the section names of q03, q04, q07, q09,
+  v01, e01 and i01 were corrected to the clause-text form the indexer really produces (for
+  example "4.18 A student may request freezing"), and the `expect:` strings of q03, q04, q07
+  and q08 were corrected to the PDF's wording. No question, id, type or source was changed.
 - **Citation validity** = citations that match a retrieved (source, section) / all citations.
   The api already drops invalid citations before responding (`services/citations.py`), so this
   measures that the guard works end to end.
