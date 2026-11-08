@@ -61,7 +61,16 @@ Building this example also exposed a real bug in our first version: cropping the
 `outside_bbox(table)` cut the last line of the paragraph just above the table ("...GPA and CGPA
 of a student in" lost "every semester."). We now drop only the characters that lie inside a
 table box; `test_pdf_table_becomes_rows_and_the_text_above_it_survives` pins it.
-TODO(team): add one real example from the Annual Report tables after your first Job run.
+**A real example, with its flaw.** Annual Report 2023-24, PDF page 13 (faculty by campus, 8 rows
+x 26 columns), run with `python3 table_example.py corpus/raw/annual-report-2023-24.pdf`. Plain
+`extract_text()` of the table area already gives one readable line per campus, for example
+`Islamabad 19 14 46 16 83 50 8 236`. Our extractor also keeps one line per row, but pdfplumber finds
+26 columns because the merged header cells are spread over several cells, so every row is padded with
+empty cells (`|  | Islamabad |  |  | 19 |  |  | 14 | ...`) and the header cells are not always in
+the same column as the numbers below them (`Prof.` is in column 4, its first value in column 5).
+All the numbers survive and each campus is still one row, but which header belongs to which number
+has to be inferred. For this table the plain text was no worse than our output, and we did not
+change the extractor for it; wide tables with merged headers are a known weakness.
 
 **What we could not recover:** OCR of the scanned policy loses its layout (headers, any table
 borders) and may misread clause numbers; we keep the text and accept that its citations are
