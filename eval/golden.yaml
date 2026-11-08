@@ -93,10 +93,10 @@ questions:
 
   - id: v03
     type: version
-    question: According to the previous 2025 handbook, how many semesters could a student freeze?
+    question: According to the previous 2023 rules, how many semesters could a student freeze?
     allow_superseded: true     # the question asks for the old edition on purpose
     relevant:
-      - {source: academic-rules-handbook-jun-2025.pdf, section: "Freezing of Semester"}
+      - {source: undergraduate-academic-rules-aug-2023.pdf, section: "4.18"}
     expect: "2"
 
   # --- exact terms: what embeddings blur -------------------------------------------------
