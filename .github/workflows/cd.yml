@@ -98,7 +98,15 @@ jobs:
       # ephemeral cluster runs the ci overlay (stub LLM, fixture corpus) with the SAME
       # published images. What is proven: the pushed images pull, start, index and serve.
       - name: deploy the published images
-        run: kubectl apply -k k8s/overlays/ci
+        # the controller pod can be Ready a few seconds before its admission webhook
+        # answers; retry instead of failing on "connection refused" from the webhook
+        run: |
+          for i in $(seq 1 12); do
+            kubectl apply -k k8s/overlays/ci && exit 0
+            echo "apply failed (attempt $i), webhook probably not ready yet; retrying in 10s"
+            sleep 10
+          done
+          exit 1
       - name: wait for the indexer Job and the rollout
         run: |
           kubectl -n rahbar rollout status statefulset/chroma --timeout=300s
