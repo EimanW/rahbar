@@ -1,8 +1,8 @@
 # Engineering notes
 
 Line numbers refer to the files as committed. Where an answer needs a number that only the
-running cluster can give (`kubectl top`, real-corpus recall), it is marked **TODO(team)** with
-the exact command; nothing here is a guess dressed up as a measurement.
+running cluster can give (`kubectl top`, real-corpus recall), it was measured on minikube on
+8 Nov 2026 and cites the file it came from; nothing here is a guess dressed up as a measurement.
 
 ## 1. Indexing in API startup: what breaks with 3 replicas and one Chroma volume?
 Three pods would start at once (`k8s/base/api.yaml:9`, `replicas: 3`) and each would begin
@@ -55,11 +55,12 @@ the model servers (`ollama-incluster` replicas, or a hosted provider's rate limi
 
 ## 4. The indexer's peak memory, its limit, the margin, and the exit code when it is wrong
 The Job's limit is `memory: 1536Mi` with a request of `512Mi` (`k8s/base/indexer-job.yaml:75` and `:72`;
-the reindex CronJob template repeats them at `k8s/base/reindex-cronjob.yaml:77` and `:74`). **Peak: TODO(team).** Measure during a real-corpus run with
-`watch -n 2 kubectl top pods -n rahbar -l app=indexer` (metrics-server samples about every 15 s,
-so watch the whole run, OCR and embedding included) and save the output to
-`docs/evidence/kubectl-top-indexer.txt`. Then set the limit to about 1.5 x the observed peak
-and write the margin here. If the limit is set below the peak, the kernel kills the container:
+the reindex CronJob template repeats them at `k8s/base/reindex-cronjob.yaml:77` and `:74`). **Peak: 644Mi** of memory (and 991m of CPU), the maximum in
+`docs/evidence/kubectl-top-indexer.txt`, sampled with `kubectl top pods -n rahbar -l app=indexer`
+over one full reindex run on 8 Nov 2026 (17:34:44 to 17:36:47). metrics-server samples about every
+15 s, so a shorter spike between two samples could be missed. The peak is 42% of the 1536Mi limit,
+a margin of 892Mi. We left the limits unchanged: the 1.5 x rule of thumb would give about 966Mi,
+and the current limit is about 2.4 x the observed peak. If the limit is set below the peak, the kernel kills the container:
 `OOMKilled`, **exit code 137**, and because `restartPolicy: OnFailure` with `backoffLimit: 3`,
 the pod restarts into the same OOM up to three times (CrashLoopBackOff) before the Job is marked
 failed. `kubectl describe pod` shows `Last State: Terminated, Reason: OOMKilled, Exit Code: 137`.
@@ -67,17 +68,21 @@ Embedding is where it bites: a 60-page PDF's text, its OCR images at 300 dpi and
 vectors are all in memory at once, far more than answering one query.
 
 ## 5. recall@5 by question type: where is it worst, and why?
-**Real numbers: TODO(team)** from `eval/results.json`, field `recall@5_by_type`, after the first
-real-corpus run. On the fixture set every type scores 1.00 (too small to separate them). What we
-expect, and why: **exact-term questions** ("What does clause 1.21 require?", "How many grade
-points is a B+?") will be worst. A dense embedding represents meaning, and "1.21", "5.4" and
+**Real numbers** from `eval/results.json`, field `recall@5_by_type` (real corpus on minikube,
+corrected golden set): exact 0.3333, ordinary 0.7778, version 0.6667, injection 1.0; overall
+0.6875. On the fixture set every type scores 1.00 (too small to separate them). On the real
+corpus, **exact-term questions** ("What does clause 1.21 require?", "How many grade
+points is a B+?") were the worst: 0.33 against 0.78 for ordinary questions, a gap of 0.44, as we expected. A dense embedding represents meaning, and "1.21", "5.4" and
 "3.33" carry almost no meaning of their own: "clause 1.21" sits about as close to clause 1.22
 (the attendance consequence) as to 1.21 itself, and the prospectus numbers the same rule
 "clause 1". The technique from the RAG lecture that addresses it is **hybrid retrieval**: combine
 the vector score with a lexical score (BM25 or keyword matching) so exact tokens count. We
 implemented a small version, an exact-term boost in re-ranking (`api/app/retrieval/chroma.py`,
 `EXACT_BOOST`, line 34), and the next step would be a real BM25 index over the same chunks with
-reciprocal rank fusion. TODO(team): replace "we expect" with the measured gap.
+reciprocal rank fusion. The measured gap is in the numbers above. In `eval/retrieved-dump.md` the exact-term misses are
+e01 (clause 1.21 itself is not among the top 5) and e02 (the B+ question: the top results are the
+HTML grading page, the prospectus and clause 2.6, not the handbook's Grade Points section); only
+e03 (clause 5.4) is found.
 
 ## 6. EMBED_MODEL changed on the API only: what does your system do?
 The api compares its `EMBED_MODEL` with the `embed_model` the indexer wrote into the collection
