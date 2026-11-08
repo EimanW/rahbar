@@ -1,0 +1,9 @@
+# Accepted findings. Each entry needs a reason and evidence; review before every release.
+#
+# CVE-2025-47273 (setuptools < 78.1.1, path traversal in PackageIndex), rahbar-api only.
+# False positive. The installed setuptools is 84.2.1 (`pip list` inside the image), and
+# no setuptools-70.3.0 dist-info exists anywhere in the final filesystem (`find /`).
+# Trivy reports it with an empty PkgPath, i.e. from package metadata, not from an
+# installed package. Removing pip and the wheels' build-time SBOMs did not clear it.
+# PackageIndex is only used by easy_install-style downloads, which the api never runs.
+CVE-2025-47273

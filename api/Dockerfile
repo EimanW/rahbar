@@ -14,7 +14,8 @@ RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/* \
 WORKDIR /app
 # dependencies first, so a code change does not reinstall them (layer caching)
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+# pip is not needed at runtime: smaller image, one less tool for an attacker
+RUN pip install -r requirements.txt && pip uninstall -y pip
 
 COPY app ./app
 
