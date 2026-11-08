@@ -1,0 +1,262 @@
+16:31:45
+api-bbdc6f745-hww4j      5m    70Mi   
+api-bbdc6f745-w7kmb      4m    70Mi   
+chroma-0                 2m    83Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:31:51
+api-bbdc6f745-w7kmb      4m    70Mi   
+chroma-0                 2m    83Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:31:58
+chroma-0                 2m    83Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:32:04
+chroma-0                 2m    83Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:32:10
+chroma-0                 2m    83Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:32:16
+chroma-0                 2m    83Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:32:22
+chroma-0                 2m    83Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:32:28
+api-7cf78996fc-9cgs6     30m   69Mi   
+api-7cf78996fc-c9jf9     30m   70Mi   
+api-7cf78996fc-sb4lc     35m   71Mi   
+chroma-0                 3m    85Mi   
+redis-54459476c5-jx4tj   8m    17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:32:34
+api-7cf78996fc-9cgs6     30m   69Mi   
+api-7cf78996fc-c9jf9     30m   70Mi   
+api-7cf78996fc-sb4lc     35m   71Mi   
+chroma-0                 3m    85Mi   
+redis-54459476c5-jx4tj   8m    17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:32:40
+api-7cf78996fc-9cgs6     30m   69Mi   
+api-7cf78996fc-c9jf9     30m   70Mi   
+api-7cf78996fc-sb4lc     35m   71Mi   
+chroma-0                 3m    85Mi   
+redis-54459476c5-jx4tj   8m    17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:32:47
+api-7cf78996fc-9cgs6     30m   69Mi   
+api-7cf78996fc-c9jf9     30m   70Mi   
+api-7cf78996fc-sb4lc     35m   71Mi   
+chroma-0                 3m    85Mi   
+redis-54459476c5-jx4tj   8m    17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:32:53
+api-7cf78996fc-9cgs6     30m   69Mi   
+api-7cf78996fc-c9jf9     30m   70Mi   
+api-7cf78996fc-sb4lc     35m   71Mi   
+chroma-0                 3m    85Mi   
+redis-54459476c5-jx4tj   8m    17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:32:59
+api-7cf78996fc-9cgs6     30m   69Mi   
+api-7cf78996fc-c9jf9     30m   70Mi   
+api-7cf78996fc-sb4lc     35m   71Mi   
+chroma-0                 3m    85Mi   
+redis-54459476c5-jx4tj   8m    17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:33:05
+api-7cf78996fc-9cgs6     30m   69Mi   
+api-7cf78996fc-c9jf9     30m   70Mi   
+api-7cf78996fc-sb4lc     35m   71Mi   
+chroma-0                 3m    85Mi   
+redis-54459476c5-jx4tj   8m    17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:33:11
+api-7cf78996fc-9cgs6     30m   69Mi   
+api-7cf78996fc-c9jf9     30m   70Mi   
+api-7cf78996fc-sb4lc     35m   71Mi   
+chroma-0                 3m    85Mi   
+redis-54459476c5-jx4tj   8m    17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:33:17
+api-7cf78996fc-9cgs6     30m   69Mi   
+api-7cf78996fc-c9jf9     30m   70Mi   
+api-7cf78996fc-sb4lc     35m   71Mi   
+chroma-0                 3m    85Mi   
+redis-54459476c5-jx4tj   8m    17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:33:24
+api-7cf78996fc-9cgs6     30m   69Mi   
+api-7cf78996fc-c9jf9     30m   70Mi   
+api-7cf78996fc-sb4lc     35m   71Mi   
+chroma-0                 3m    85Mi   
+redis-54459476c5-jx4tj   8m    17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:33:30
+api-7cf78996fc-9cgs6     10m   69Mi   
+api-7cf78996fc-c9jf9     9m    71Mi   
+api-7cf78996fc-sb4lc     7m    71Mi   
+chroma-0                 7m    85Mi   
+redis-54459476c5-jx4tj   11m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:33:36
+api-7cf78996fc-9cgs6     10m   69Mi   
+api-7cf78996fc-c9jf9     9m    71Mi   
+api-7cf78996fc-sb4lc     7m    71Mi   
+chroma-0                 7m    85Mi   
+redis-54459476c5-jx4tj   11m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:33:42
+api-7cf78996fc-9cgs6     10m   69Mi   
+api-7cf78996fc-c9jf9     9m    71Mi   
+api-7cf78996fc-sb4lc     7m    71Mi   
+chroma-0                 7m    85Mi   
+redis-54459476c5-jx4tj   11m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:33:48
+api-7cf78996fc-9cgs6     10m   69Mi   
+api-7cf78996fc-c9jf9     9m    71Mi   
+api-7cf78996fc-sb4lc     7m    71Mi   
+chroma-0                 7m    85Mi   
+redis-54459476c5-jx4tj   11m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:33:54
+api-7cf78996fc-9cgs6     10m   69Mi   
+api-7cf78996fc-c9jf9     9m    71Mi   
+api-7cf78996fc-sb4lc     7m    71Mi   
+chroma-0                 7m    85Mi   
+redis-54459476c5-jx4tj   11m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:34:00
+api-7cf78996fc-9cgs6     10m   69Mi   
+api-7cf78996fc-c9jf9     9m    71Mi   
+api-7cf78996fc-sb4lc     7m    71Mi   
+chroma-0                 7m    85Mi   
+redis-54459476c5-jx4tj   11m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:34:06
+api-7cf78996fc-9cgs6     10m   69Mi   
+api-7cf78996fc-c9jf9     9m    71Mi   
+api-7cf78996fc-sb4lc     7m    71Mi   
+chroma-0                 7m    85Mi   
+redis-54459476c5-jx4tj   11m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:34:13
+api-7cf78996fc-9cgs6     10m   69Mi   
+api-7cf78996fc-c9jf9     9m    71Mi   
+api-7cf78996fc-sb4lc     7m    71Mi   
+chroma-0                 7m    85Mi   
+redis-54459476c5-jx4tj   11m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:34:19
+api-7cf78996fc-9cgs6     10m   69Mi   
+api-7cf78996fc-c9jf9     9m    71Mi   
+api-7cf78996fc-sb4lc     7m    71Mi   
+chroma-0                 7m    85Mi   
+redis-54459476c5-jx4tj   11m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:34:25
+api-7cf78996fc-9cgs6     10m   69Mi   
+api-7cf78996fc-c9jf9     9m    71Mi   
+api-7cf78996fc-sb4lc     7m    71Mi   
+chroma-0                 7m    85Mi   
+redis-54459476c5-jx4tj   11m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:34:31
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     5m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:34:37
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     5m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:34:43
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     5m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:34:49
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     5m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:34:55
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     5m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:35:01
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     5m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:35:08
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     5m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:35:14
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     5m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:35:20
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     5m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:35:26
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     5m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   17Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:35:32
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     6m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   16Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:35:38
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     6m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   16Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
+16:35:44
+api-7cf78996fc-9cgs6     6m    69Mi   
+api-7cf78996fc-c9jf9     5m    71Mi   
+api-7cf78996fc-sb4lc     6m    71Mi   
+chroma-0                 2m    86Mi   
+redis-54459476c5-jx4tj   10m   16Mi   
+ui-7c5fc79c4b-m2rzd      1m    2Mi    
