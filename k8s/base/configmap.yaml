@@ -20,8 +20,8 @@ data:
   # 0.2: facts and JSON belong at 0 to 0.3; a little above 0 avoids greedy loops on a 3B
   # model. Temperature does not fix hallucination; grounding and abstention do.
   TEMPERATURE: "0.2"
-  RELEVANCE_FLOOR: "0.50"              # best retrieved similarity below this -> abstain
-  CACHE_THRESHOLD: "0.95"              # cosine for a semantic cache hit (docs/PIPELINE.md)
+  RELEVANCE_FLOOR: "0.665"              # best retrieved similarity below this -> abstain
+  CACHE_THRESHOLD: "0.94"              # cosine for a semantic cache hit (docs/PIPELINE.md)
   CACHE_TTL_SECONDS: "86400"
   REDIS_HOST: "redis"
   REDIS_PORT: "6379"
