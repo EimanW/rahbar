@@ -172,3 +172,4 @@ analysis, engineering notes, ADRs, evidence · `scripts/` submission checker, ch
 
 ## AI usage
 Disclosed in [docs/AI-USAGE.md](docs/AI-USAGE.md).
+
