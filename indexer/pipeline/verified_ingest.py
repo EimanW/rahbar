@@ -29,6 +29,8 @@ def verified_documents(settings, documents):
             for e in json.loads(index.read_text(encoding="utf-8-sig"))
         }
 
+    from .recency import detect_versions
+    entries = detect_versions(entries)
     verifier = Verifier()
     accepted = []
     results = []
@@ -36,6 +38,7 @@ def verified_documents(settings, documents):
     for path, version, superseded in documents:
         try:
             entry = entries.get(path.name, {})
+            superseded = entry.get('superseded', superseded)
             raw = path.read_bytes()
             doc = extract(str(path), version, superseded)
 
@@ -54,6 +57,7 @@ def verified_documents(settings, documents):
             }
 
             result = verifier.check(path, doc, metadata)
+            result['recency']['latest_version'] = entry.get('latest_version', version)
 
             if entry.get("bytes") and entry["bytes"] != len(raw):
                 result["errors"].append("file_size_mismatch")
@@ -108,3 +112,4 @@ def verified_documents(settings, documents):
     }), flush=True)
 
     return accepted
+
