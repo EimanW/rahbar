@@ -1,0 +1,312 @@
+{
+  "documents": 17,
+  "accepted": 12,
+  "quarantined": 5,
+  "results": [
+    {
+      "source": "undergraduate-academic-rules-aug-2023.pdf",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2023-08",
+        "superseded": true,
+        "latest_version": "2023-08"
+      },
+      "uniqueness": {
+        "hash": "8797aa4f71ed0bead576f6c9d452c4a825a873847e9c30ef1a0f405c2fc15d28",
+        "exact_duplicate": null,
+        "nearest_document": null,
+        "similarity": 0.0
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "academic-rules-handbook-jun-2026.pdf",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026-06",
+        "superseded": false,
+        "latest_version": "2026-06"
+      },
+      "uniqueness": {
+        "hash": "c9764149461b08d8adc810611a7d761d214e41eee40f2a668d35a20c64d568fd",
+        "exact_duplicate": null,
+        "nearest_document": "undergraduate-academic-rules-aug-2023.pdf",
+        "similarity": 0.7558234803213089
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026",
+        "superseded": false,
+        "latest_version": "2026"
+      },
+      "uniqueness": {
+        "hash": "e311f7be888a2f0025d38fb998ed9482411cba877cce0841a7fa9d05345c93bc",
+        "exact_duplicate": null,
+        "nearest_document": "undergraduate-academic-rules-aug-2023.pdf",
+        "similarity": 0.8420649682407869
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "student-handbook-jun-2026.pdf",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026-06",
+        "superseded": false,
+        "latest_version": "2026-06"
+      },
+      "uniqueness": {
+        "hash": "0ca708d8a9686e4078e102ffd74594a56052ef5d46114dd1239bafa66f5e662c",
+        "exact_duplicate": null,
+        "nearest_document": "academic-rules-handbook-jun-2026.pdf",
+        "similarity": 0.7897580291705576
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "annual-report-2019-20.pdf",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2019-20",
+        "superseded": false,
+        "latest_version": "2019-20"
+      },
+      "uniqueness": {
+        "hash": "df6dd1cc3660689bda9e7e829e92c5a229951d29366c0bc7c4c130d340104336",
+        "exact_duplicate": null,
+        "nearest_document": "student-handbook-jun-2026.pdf",
+        "similarity": 0.41306777127301386
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "annual-report-2023-24.pdf",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2023-24",
+        "superseded": false,
+        "latest_version": "2023-24"
+      },
+      "uniqueness": {
+        "hash": "9b228b7d3674537babbbd7571b518d6a21c163861008bdf7f631a5ca13863aeb",
+        "exact_duplicate": null,
+        "nearest_document": "annual-report-2019-20.pdf",
+        "similarity": 0.6782964208229699
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "fee-structure-page.html",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026-27",
+        "superseded": false,
+        "latest_version": "2026-27"
+      },
+      "uniqueness": {
+        "hash": "518d08773f457536526650731e874c8a2242d53413379a91dc9ea535be1104bc",
+        "exact_duplicate": null,
+        "nearest_document": "prospectus-2026-academic-rules-and-regulations.pdf",
+        "similarity": 0.19887530615568852
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "grading-page.html",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026",
+        "superseded": false,
+        "latest_version": "2026"
+      },
+      "uniqueness": {
+        "hash": "b68fedd1867bac0c68f3bccfcc5fe0cc829655770504707e341501f91eb952cf",
+        "exact_duplicate": null,
+        "nearest_document": "prospectus-2026-academic-rules-and-regulations.pdf",
+        "similarity": 0.5812876519329889
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2022-05",
+        "superseded": false,
+        "latest_version": "2022-05"
+      },
+      "uniqueness": {
+        "hash": "e43f045f50660e01e5316231ec9090f29471221a921b19e8370e666e9d2bb430",
+        "exact_duplicate": null,
+        "nearest_document": "student-handbook-jun-2026.pdf",
+        "similarity": 0.35265692890515915
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "duplicate-1.pdf",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026-11",
+        "superseded": false,
+        "latest_version": "2026-11"
+      },
+      "uniqueness": {
+        "hash": "c9764149461b08d8adc810611a7d761d214e41eee40f2a668d35a20c64d568fd",
+        "exact_duplicate": "academic-rules-handbook-jun-2026.pdf",
+        "nearest_document": null,
+        "similarity": 0.0
+      },
+      "passed": false,
+      "errors": [
+        "exact_duplicate"
+      ]
+    },
+    {
+      "source": "duplicate-2.pdf",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026-11",
+        "superseded": false,
+        "latest_version": "2026-11"
+      },
+      "uniqueness": {
+        "hash": "c9764149461b08d8adc810611a7d761d214e41eee40f2a668d35a20c64d568fd",
+        "exact_duplicate": "academic-rules-handbook-jun-2026.pdf",
+        "nearest_document": null,
+        "similarity": 0.0
+      },
+      "passed": false,
+      "errors": [
+        "exact_duplicate"
+      ]
+    },
+    {
+      "source": "library-policy-v1.txt",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026-01",
+        "superseded": true,
+        "latest_version": "2026-11"
+      },
+      "uniqueness": {
+        "hash": "11ff9cd73168d855abb17fcaf9a50c08cb4bccca4004e9773a84103474432cab",
+        "exact_duplicate": null,
+        "nearest_document": "student-handbook-jun-2026.pdf",
+        "similarity": 0.3440747028876208
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "library-near-duplicate.txt",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026-11",
+        "superseded": false,
+        "latest_version": "2026-11"
+      },
+      "uniqueness": {
+        "hash": "e6b0004eef285f3256e01463f8f40cbde84d222bf53968c08796015d82b8bf65",
+        "exact_duplicate": null,
+        "nearest_document": "library-policy-v1.txt",
+        "similarity": 0.9854006762498304
+      },
+      "passed": false,
+      "errors": [
+        "near_duplicate"
+      ]
+    },
+    {
+      "source": "corrupt.pdf",
+      "passed": false,
+      "errors": [
+        "extraction_failed",
+        "No /Root object! - Is this really a PDF?"
+      ]
+    },
+    {
+      "source": "missing-metadata.txt",
+      "quality": true,
+      "completeness": false,
+      "recency": {
+        "version": "None",
+        "superseded": false,
+        "latest_version": "None"
+      },
+      "uniqueness": {
+        "hash": "11ff9cd73168d855abb17fcaf9a50c08cb4bccca4004e9773a84103474432cab",
+        "exact_duplicate": "library-policy-v1.txt",
+        "nearest_document": null,
+        "similarity": 0.0
+      },
+      "passed": false,
+      "errors": [
+        "missing_metadata:title,doc_version",
+        "exact_duplicate"
+      ]
+    },
+    {
+      "source": "library-policy-v2.txt",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026-11",
+        "superseded": false,
+        "latest_version": "2026-11"
+      },
+      "uniqueness": {
+        "hash": "11c33a0f7bef1415c9141ed74ac989d640f7401a4e6068565307b7ac6b91f4c3",
+        "exact_duplicate": null,
+        "nearest_document": "student-handbook-jun-2026.pdf",
+        "similarity": 0.20884787402371774
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "source": "injection-test.txt",
+      "quality": true,
+      "completeness": true,
+      "recency": {
+        "version": "2026-11",
+        "superseded": false,
+        "latest_version": "2026-11"
+      },
+      "uniqueness": {
+        "hash": "7b637e30b7bf93ae32ef7e32865f1830768bf6d9b32233fb474f3116bfa4001b",
+        "exact_duplicate": null,
+        "nearest_document": "student-handbook-jun-2026.pdf",
+        "similarity": 0.21186708008311922
+      },
+      "passed": true,
+      "errors": []
+    }
+  ]
+}
