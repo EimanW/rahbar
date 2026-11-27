@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "metric": "Recall@5",
+      "actual": 0.4027777777777778,
+      "threshold": 0.35,
+      "passed": true
+    },
+    {
+      "metric": "Citation validity",
+      "actual": 1,
+      "threshold": 0.95,
+      "passed": true
+    },
+    {
+      "metric": "Abstention correctness",
+      "actual": 0,
+      "threshold": 0.0,
+      "passed": true
+    },
+    {
+      "metric": "Latency p95",
+      "actual": 37.5751000829041,
+      "threshold": 1000,
+      "passed": true
+    }
+  ]
+}

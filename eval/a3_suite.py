@@ -1,4 +1,5 @@
-﻿import json
+import os
+import json
 import math
 import time
 import statistics
@@ -9,7 +10,7 @@ import httpx
 
 random.seed(42)
 HERE = Path(__file__).resolve().parent
-API = "http://127.0.0.1:18080/api/ask"
+API = os.environ.get("EVAL_API", "http://127.0.0.1:18080/api/ask")
 
 questions = [
     json.loads(line)
@@ -152,3 +153,4 @@ print(json.dumps(result["repeat_delta"], indent=2))
 print("\nNOISE DIFFERENCE")
 print(json.dumps(result["noise_delta"], indent=2))
 print("\nRESULT SAVED:", path)
+
