@@ -119,7 +119,8 @@ class ChromaRetriever:
             similarity = 1.0 - float(dist)
             boost = EXACT_BOOST * len(wanted & exact_terms(text)) if wanted else 0.0
             scored.append((similarity + boost, Passage(
-                chunk_id=cid, text=text, source=str(meta.get("source", "?")),
+                chunk_id=cid, text=text, doc_id=meta.get("doc_id"),
+                doc_version=meta.get("doc_version"), source=str(meta.get("source", "?")),
                 section=str(meta.get("section", "?")),
                 page=int(meta["page"]) if meta.get("page") is not None else None,
                 score=round(similarity, 4), superseded=bool(meta.get("superseded", False)),

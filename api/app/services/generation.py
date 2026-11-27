@@ -15,7 +15,7 @@ from __future__ import annotations
 import json
 import logging
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from pydantic import ValidationError
 
@@ -75,6 +75,7 @@ class GenerationResult:
     answer: Answer
     retried: bool = False
     fallback: bool = False
+    prompts: list[list[dict[str, str]]] = field(default_factory=list)
     tokens_in: int = 0
     tokens_out: int = 0
 
@@ -90,6 +91,7 @@ def generate(provider: LLMProvider, question: str, passages: list[Passage],
     messages = build_messages(question, passages)
     result = GenerationResult(answer=fallback_answer())
     for attempt in (1, 2):
+        result.prompts.append(messages)
         try:
             completion = provider.complete(messages, ANSWER_SCHEMA, temperature)
         except Exception as exc:  # transport error, timeout, HTTP 5xx: never a 500

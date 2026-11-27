@@ -26,6 +26,8 @@ class Passage(BaseModel):
     section: str
     page: int | None = None
     score: float = Field(description="Similarity, higher is closer (1 - cosine distance).")
+    doc_id: str | None = None
+    doc_version: str | None = None
     superseded: bool = False      # from chunk metadata; lets the eval spot stale citations
 
 
