@@ -98,8 +98,8 @@ def run_pipeline(settings: IndexerSettings) -> int:
         stored_words=stored_words,
         amplification=round(stored_words / max(original_words, 1), 3),
         chunk_size=settings.chunk_size, chunk_overlap=settings.chunk_overlap)
-    vectors = embed([c.text for c in all_chunks], settings)
-    return store(all_chunks, vectors, settings)
+    from .incremental import incremental_store
+    return incremental_store(all_chunks, settings)
 
 
 def main() -> int:
@@ -128,4 +128,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
 
