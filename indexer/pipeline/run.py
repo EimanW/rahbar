@@ -1,4 +1,4 @@
-"""The indexer Job's entry point. It runs once and exits (section 4.2).
+﻿"""The indexer Job's entry point. It runs once and exits (section 4.2).
 
     python -m pipeline.run --dummy    # week 1: three fake chunks, no model needed
     python -m pipeline.run            # the real pipeline: extract, clean, chunk, embed, store
@@ -77,8 +77,9 @@ def run_pipeline(settings: IndexerSettings) -> int:
     extract_mod.OCR_ENABLED = settings.ocr
     all_chunks: list[Chunk] = []
     original_words = 0
-    for path, doc_version, superseded in documents:
-        doc = clean(extract(str(path), doc_version, superseded))
+    from .verified_ingest import verified_documents
+    for path, doc in verified_documents(settings, documents):
+
         original_words += sum(len(p.text.split()) for p in doc.pages)
         if settings.chunker == "fixed":
             pieces = fixed_size_chunk(doc, settings.chunk_size)
@@ -127,3 +128,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
