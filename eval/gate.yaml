@@ -1,0 +1,4 @@
+min_recall_at_5: 0.35
+min_citation_validity: 0.95
+min_abstention_correctness: 0.0
+max_latency_p95_ms: 1000
