@@ -1,0 +1,458 @@
+{
+  "seed": 42,
+  "first": {
+    "model": "hash-bow-768",
+    "paraphrase_pairs": 15,
+    "unrelated_pairs": 15,
+    "mean_paraphrase_similarity": 0.3609460540179383,
+    "mean_unrelated_similarity": 0.0,
+    "separation_gap": 0.3609460540179383,
+    "mean_embedding_ms_per_text": 0.11454666188607614,
+    "max_determinism_difference": 0.0,
+    "positive_details": [
+      {
+        "pair": [
+          "What is the minimum CGPA?",
+          "What minimum CGPA is required?"
+        ],
+        "cosine": 0.7745966692414835
+      },
+      {
+        "pair": [
+          "How can I freeze a semester?",
+          "How do I apply for semester freezing?"
+        ],
+        "cosine": 0.2581988897471612
+      },
+      {
+        "pair": [
+          "What is the attendance requirement?",
+          "How much attendance is required?"
+        ],
+        "cosine": 0.2581988897471612
+      },
+      {
+        "pair": [
+          "How do I withdraw a course?",
+          "What is the course withdrawal procedure?"
+        ],
+        "cosine": 0.2581988897471612
+      },
+      {
+        "pair": [
+          "What is the tuition fee?",
+          "How much tuition fee must I pay?"
+        ],
+        "cosine": 0.5773502691896257
+      },
+      {
+        "pair": [
+          "Can I repeat a failed course?",
+          "Am I allowed to repeat failed courses?"
+        ],
+        "cosine": 0.4472135954999579
+      },
+      {
+        "pair": [
+          "What is academic probation?",
+          "What does academic probation mean?"
+        ],
+        "cosine": 0.7745966692414835
+      },
+      {
+        "pair": [
+          "How long is a bachelor degree?",
+          "What is the duration of a bachelor degree?"
+        ],
+        "cosine": 0.6000000000000001
+      },
+      {
+        "pair": [
+          "What are the graduation requirements?",
+          "What requirements must I meet to graduate?"
+        ],
+        "cosine": 0.21821789023599242
+      },
+      {
+        "pair": [
+          "How are grade points calculated?",
+          "What is the grade point calculation method?"
+        ],
+        "cosine": 0.14285714285714285
+      },
+      {
+        "pair": [
+          "What is the exam cheating penalty?",
+          "What is the punishment for cheating in exams?"
+        ],
+        "cosine": 0.20000000000000004
+      },
+      {
+        "pair": [
+          "Can students use AI tools?",
+          "Are AI tools allowed for students?"
+        ],
+        "cosine": 0.5714285714285714
+      },
+      {
+        "pair": [
+          "How do I register for courses?",
+          "What is the course registration process?"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is the scholarship eligibility?",
+          "Who is eligible for a scholarship?"
+        ],
+        "cosine": 0.3333333333333334
+      },
+      {
+        "pair": [
+          "When are final exams held?",
+          "What is the schedule for final examinations?"
+        ],
+        "cosine": 0.0
+      }
+    ],
+    "negative_details": [
+      {
+        "pair": [
+          "What is the minimum CGPA?",
+          "The ocean contains salt water"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "How can I freeze a semester?",
+          "Elephants live in forests"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is the attendance requirement?",
+          "A telescope observes distant galaxies"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "How do I withdraw a course?",
+          "Chocolate melts when heated"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is the tuition fee?",
+          "Penguins inhabit cold regions"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "Can I repeat a failed course?",
+          "Cars require fuel to operate"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is academic probation?",
+          "Rain falls from clouds"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "How long is a bachelor degree?",
+          "The moon orbits Earth"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What are the graduation requirements?",
+          "Birds build nests in trees"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "How are grade points calculated?",
+          "Bread is made using flour"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is the exam cheating penalty?",
+          "Volcanoes release molten rock"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "Can students use AI tools?",
+          "Guitars have strings"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "How do I register for courses?",
+          "Fish breathe through gills"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is the scholarship eligibility?",
+          "Mountains contain different minerals"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "When are final exams held?",
+          "Bees produce honey"
+        ],
+        "cosine": 0.0
+      }
+    ]
+  },
+  "second": {
+    "model": "hash-bow-768",
+    "paraphrase_pairs": 15,
+    "unrelated_pairs": 15,
+    "mean_paraphrase_similarity": 0.3609460540179383,
+    "mean_unrelated_similarity": 0.0,
+    "separation_gap": 0.3609460540179383,
+    "mean_embedding_ms_per_text": 0.048719990688065686,
+    "max_determinism_difference": 0.0,
+    "positive_details": [
+      {
+        "pair": [
+          "What is the minimum CGPA?",
+          "What minimum CGPA is required?"
+        ],
+        "cosine": 0.7745966692414835
+      },
+      {
+        "pair": [
+          "How can I freeze a semester?",
+          "How do I apply for semester freezing?"
+        ],
+        "cosine": 0.2581988897471612
+      },
+      {
+        "pair": [
+          "What is the attendance requirement?",
+          "How much attendance is required?"
+        ],
+        "cosine": 0.2581988897471612
+      },
+      {
+        "pair": [
+          "How do I withdraw a course?",
+          "What is the course withdrawal procedure?"
+        ],
+        "cosine": 0.2581988897471612
+      },
+      {
+        "pair": [
+          "What is the tuition fee?",
+          "How much tuition fee must I pay?"
+        ],
+        "cosine": 0.5773502691896257
+      },
+      {
+        "pair": [
+          "Can I repeat a failed course?",
+          "Am I allowed to repeat failed courses?"
+        ],
+        "cosine": 0.4472135954999579
+      },
+      {
+        "pair": [
+          "What is academic probation?",
+          "What does academic probation mean?"
+        ],
+        "cosine": 0.7745966692414835
+      },
+      {
+        "pair": [
+          "How long is a bachelor degree?",
+          "What is the duration of a bachelor degree?"
+        ],
+        "cosine": 0.6000000000000001
+      },
+      {
+        "pair": [
+          "What are the graduation requirements?",
+          "What requirements must I meet to graduate?"
+        ],
+        "cosine": 0.21821789023599242
+      },
+      {
+        "pair": [
+          "How are grade points calculated?",
+          "What is the grade point calculation method?"
+        ],
+        "cosine": 0.14285714285714285
+      },
+      {
+        "pair": [
+          "What is the exam cheating penalty?",
+          "What is the punishment for cheating in exams?"
+        ],
+        "cosine": 0.20000000000000004
+      },
+      {
+        "pair": [
+          "Can students use AI tools?",
+          "Are AI tools allowed for students?"
+        ],
+        "cosine": 0.5714285714285714
+      },
+      {
+        "pair": [
+          "How do I register for courses?",
+          "What is the course registration process?"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is the scholarship eligibility?",
+          "Who is eligible for a scholarship?"
+        ],
+        "cosine": 0.3333333333333334
+      },
+      {
+        "pair": [
+          "When are final exams held?",
+          "What is the schedule for final examinations?"
+        ],
+        "cosine": 0.0
+      }
+    ],
+    "negative_details": [
+      {
+        "pair": [
+          "What is the minimum CGPA?",
+          "The ocean contains salt water"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "How can I freeze a semester?",
+          "Elephants live in forests"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is the attendance requirement?",
+          "A telescope observes distant galaxies"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "How do I withdraw a course?",
+          "Chocolate melts when heated"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is the tuition fee?",
+          "Penguins inhabit cold regions"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "Can I repeat a failed course?",
+          "Cars require fuel to operate"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is academic probation?",
+          "Rain falls from clouds"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "How long is a bachelor degree?",
+          "The moon orbits Earth"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What are the graduation requirements?",
+          "Birds build nests in trees"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "How are grade points calculated?",
+          "Bread is made using flour"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is the exam cheating penalty?",
+          "Volcanoes release molten rock"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "Can students use AI tools?",
+          "Guitars have strings"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "How do I register for courses?",
+          "Fish breathe through gills"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "What is the scholarship eligibility?",
+          "Mountains contain different minerals"
+        ],
+        "cosine": 0.0
+      },
+      {
+        "pair": [
+          "When are final exams held?",
+          "Bees produce honey"
+        ],
+        "cosine": 0.0
+      }
+    ]
+  },
+  "repeat_delta": {
+    "mean_paraphrase_similarity": 0.0,
+    "mean_unrelated_similarity": 0.0,
+    "separation_gap": 0.0,
+    "mean_embedding_ms_per_text": -0.06582667119801044,
+    "max_determinism_difference": 0.0
+  }
+}
