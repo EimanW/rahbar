@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: a3-clone-collection
+  namespace: rahbar
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: indexer
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: indexer
+          image: rahbar-indexer:a3
+          imagePullPolicy: IfNotPresent
+          command: ["python", "/code/clone_collection.py"]
+          volumeMounts:
+            - name: code
+              mountPath: /code
+      volumes:
+        - name: code
+          configMap:
+            name: a3-clone-code
