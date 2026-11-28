@@ -10,3 +10,6 @@ indexer/pipeline/__pycache__
 **/*.pyc
 .git
 .venv
+
+!corpus/batch_b
+!corpus/batch_b/**

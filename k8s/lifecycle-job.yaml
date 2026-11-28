@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: a3-small-lifecycle
+  namespace: rahbar
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 180
+  template:
+    metadata:
+      labels:
+        app: indexer
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: lifecycle
+          image: rahbar-indexer:a3
+          imagePullPolicy: IfNotPresent
+          command: ["python", "/code/test_lifecycle.py"]
+          envFrom:
+            - configMapRef:
+                name: rahbar-config
+          env:
+            - name: CHROMA_COLLECTION
+              value: rahbar-a3-small-test
+            - name: PYTHONPATH
+              value: /app
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: code
+              mountPath: /code
+      volumes:
+        - name: code
+          configMap:
+            name: a3-lifecycle-code

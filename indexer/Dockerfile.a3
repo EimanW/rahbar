@@ -1,0 +1,3 @@
+FROM rahbar-indexer:corpus
+COPY indexer/pipeline /app/pipeline
+COPY corpus/batch_b/. /batch_b/

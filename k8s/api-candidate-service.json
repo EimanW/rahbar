@@ -1,0 +1,25 @@
+{
+    "apiVersion":  "v1",
+    "kind":  "Service",
+    "metadata":  {
+                     "labels":  {
+                                    "app":  "api-candidate"
+                                },
+                     "name":  "api-candidate",
+                     "namespace":  "rahbar"
+                 },
+    "spec":  {
+                 "ports":  [
+                               {
+                                   "port":  8000,
+                                   "protocol":  "TCP",
+                                   "targetPort":  8000
+                               }
+                           ],
+                 "selector":  {
+                                  "app":  "api-candidate"
+                              },
+                 "sessionAffinity":  "None",
+                 "type":  "ClusterIP"
+             }
+}

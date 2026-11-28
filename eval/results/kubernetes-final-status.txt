@@ -1,0 +1,73 @@
+﻿NAME                                 READY   STATUS      RESTARTS      AGE
+pod/a3-batch-a-repeat-c9984          0/1     Completed   0             19h
+pod/a3-batch-b-cgt2f                 0/1     Completed   0             19h
+pod/a3-clone-collection-s9tz9        0/1     Completed   0             14h
+pod/a3-eval-tqvpc                    0/1     Completed   0             14h
+pod/a3-small-lifecycle-txbbd         0/1     Completed   0             11m
+pod/api-candidate-5fb48694f4-pkjp4   1/1     Running     1 (16m ago)   14h
+pod/api-df77ddffd-8gmsk              1/1     Running     0             3m18s
+pod/api-df77ddffd-gwrn7              1/1     Running     0             3m14s
+pod/api-df77ddffd-p4msj              1/1     Running     0             3m23s
+pod/chroma-0                         1/1     Running     1 (16m ago)   23h
+pod/indexer-2mgvd                    0/1     Completed   0             23h
+pod/redis-54459476c5-xvcfw           1/1     Running     1 (16m ago)   23h
+pod/ui-7c5fc79c4b-kgctl              1/1     Running     1 (16m ago)   23h
+
+NAME                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/api               ClusterIP   10.96.33.146     <none>        8000/TCP   23h
+service/api-candidate     ClusterIP   10.97.42.112     <none>        8000/TCP   19h
+service/chroma            ClusterIP   10.106.82.152    <none>        8000/TCP   23h
+service/chroma-headless   ClusterIP   None             <none>        8000/TCP   23h
+service/redis             ClusterIP   10.100.175.170   <none>        6379/TCP   23h
+service/ui                ClusterIP   10.101.192.234   <none>        8080/TCP   23h
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api             3/3     3            3           23h
+deployment.apps/api-candidate   1/1     1            1           19h
+deployment.apps/redis           1/1     1            1           23h
+deployment.apps/ui              1/1     1            1           23h
+
+NAME                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/api-56d5d689b8             0         0         0       15h
+replicaset.apps/api-5b747c6645             0         0         0       14h
+replicaset.apps/api-669cb86f8b             0         0         0       14h
+replicaset.apps/api-6969997c95             0         0         0       23h
+replicaset.apps/api-7c66c69789             0         0         0       20h
+replicaset.apps/api-candidate-5d8f8cbbcc   0         0         0       19h
+replicaset.apps/api-candidate-5fb48694f4   1         1         1       14h
+replicaset.apps/api-candidate-65fcccd749   0         0         0       18h
+replicaset.apps/api-candidate-7545cd5b45   0         0         0       14h
+replicaset.apps/api-df77ddffd              3         3         3       3m23s
+replicaset.apps/redis-54459476c5           1         1         1       23h
+replicaset.apps/ui-7c5fc79c4b              1         1         1       23h
+
+NAME                      READY   AGE
+statefulset.apps/chroma   1/1     23h
+
+NAME                                      REFERENCE        TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/api   Deployment/api   cpu: <unknown>/70%   3         8         3          23h
+
+NAME                    SCHEDULE     TIMEZONE   SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+cronjob.batch/reindex   17 3 * * 0   <none>     False     0        <none>          23h
+
+NAME                            STATUS     COMPLETIONS   DURATION   AGE
+job.batch/a3-batch-a-repeat     Complete   1/1           4m41s      19h
+job.batch/a3-batch-b            Complete   1/1           5m11s      19h
+job.batch/a3-clone-collection   Complete   1/1           10s        14h
+job.batch/a3-eval               Complete   1/1           18s        14h
+job.batch/a3-small-lifecycle    Complete   1/1           11s        11m
+job.batch/indexer               Complete   1/1           2m43s      23h
+
+NAME                                     STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/data-chroma-0      Bound    pvc-5fd10b9a-e20b-4fea-9926-f5ed186da5cb   2Gi        RWO            standard       <unset>                 23h
+persistentvolumeclaim/rahbar-data-lake   Bound    pvc-731fdbfa-ac71-46f7-a2c8-d35b1568bbf1   2Gi        RWO            standard       <unset>                 19h
+persistentvolumeclaim/rahbar-traces      Bound    pvc-8afa5495-a60c-43d2-b217-dbf54378a496   256Mi      RWO            standard       <unset>                 23h
+persistentvolumeclaim/redis-data         Bound    pvc-b5a23ebf-cba5-4ccf-a7ad-138d0827d847   1Gi        RWO            standard       <unset>                 23h
+
+NAME                          DATA   AGE
+configmap/a3-clone-code       1      14h
+configmap/a3-eval-code        3      14h
+configmap/a3-gate-config      1      14h
+configmap/a3-lifecycle-code   1      12m
+configmap/kube-root-ca.crt    1      23h
+configmap/rahbar-config       22     23h

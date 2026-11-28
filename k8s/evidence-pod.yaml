@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: a3-evidence
+  namespace: rahbar
+spec:
+  restartPolicy: Never
+  containers:
+    - name: evidence
+      image: rahbar-indexer:a3
+      imagePullPolicy: IfNotPresent
+      command: ["sleep", "3600"]
+      volumeMounts:
+        - name: lake
+          mountPath: /data-lake
+        - name: traces
+          mountPath: /traces
+  volumes:
+    - name: lake
+      persistentVolumeClaim:
+        claimName: rahbar-data-lake
+    - name: traces
+      persistentVolumeClaim:
+        claimName: rahbar-traces

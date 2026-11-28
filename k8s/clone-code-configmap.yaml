@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  clone_collection.py: "import chromadb\n\nclient = chromadb.HttpClient(host=\"chroma\",
+    port=8000)\nsource = client.get_collection(\"rahbar-a3\")\nname = \"rahbar-a3-candidate\"\n\ntarget
+    = client.get_or_create_collection(\n    name,\n    metadata=source.metadata\n)\n\nfor
+    offset in range(0, source.count(), 100):\n    data = source.get(\n        offset=offset,\n
+    \       limit=100,\n        include=[\"documents\", \"embeddings\", \"metadatas\"]\n
+    \   )\n    target.upsert(\n        ids=data[\"ids\"],\n        documents=data[\"documents\"],\n
+    \       embeddings=data[\"embeddings\"].tolist(),\n        metadatas=data[\"metadatas\"]\n
+    \   )\n\nassert source.count() == target.count()\nprint(\"BASELINE COLLECTION:\",
+    source.name, source.count())\nprint(\"CANDIDATE COLLECTION:\", target.name, target.count())\nprint(\"COLLECTION
+    COPY: PASS\")\r\n"
+kind: ConfigMap
+metadata:
+  name: a3-clone-code
+  namespace: rahbar
