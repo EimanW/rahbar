@@ -55,3 +55,42 @@ assert collection.count() == 2
 
 print("RESTORATION: PASS", flush=True)
 print("LIFECYCLE TEST COMPLETED", flush=True)
+
+print("TEST 6: SUPERSEDED VERSION", flush=True)
+
+old = chunk("policy-v1", "Library closes at five.", "policy-v1.txt", "2026-01", True)
+new = chunk("policy-v2", "Library closes at seven.", "policy-v2.txt", "2026-02", False)
+
+incremental_store([a, old, new], settings)
+
+collection = client.get_collection(settings.collection)
+
+active = collection.get(
+    where={"superseded": False},
+    include=["metadatas"]
+)
+
+assert "policy-v1" not in active["ids"]
+assert "policy-v2" in active["ids"]
+
+print("SUPERSEDED VERSION EXCLUDED: PASS", flush=True)
+
+print("TEST 7: VERSION ROLLBACK", flush=True)
+
+old.superseded = False
+new.superseded = True
+
+incremental_store([a, old, new], settings)
+
+collection = client.get_collection(settings.collection)
+
+active = collection.get(
+    where={"superseded": False},
+    include=["metadatas"]
+)
+
+assert "policy-v1" in active["ids"]
+assert "policy-v2" not in active["ids"]
+
+print("PREVIOUS VERSION RESTORED: PASS", flush=True)
+print("ALL SEVEN TESTS COMPLETED", flush=True)

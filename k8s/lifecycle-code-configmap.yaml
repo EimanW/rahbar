@@ -19,7 +19,19 @@ data:
     == 0\nprint(\"DELETED DOCUMENT ORPHAN COUNT: 0\", flush=True)\n\nprint(\"TEST
     5: RESTORE DOCUMENT\", flush=True)\nincremental_store([a, b], settings)\n\ncollection
     = client.get_collection(settings.collection)\nassert collection.count() == 2\n\nprint(\"RESTORATION:
-    PASS\", flush=True)\nprint(\"LIFECYCLE TEST COMPLETED\", flush=True)\r\n"
+    PASS\", flush=True)\nprint(\"LIFECYCLE TEST COMPLETED\", flush=True)\r\n\nprint(\"TEST
+    6: SUPERSEDED VERSION\", flush=True)\n\nold = chunk(\"policy-v1\", \"Library closes
+    at five.\", \"policy-v1.txt\", \"2026-01\", True)\nnew = chunk(\"policy-v2\",
+    \"Library closes at seven.\", \"policy-v2.txt\", \"2026-02\", False)\n\nincremental_store([a,
+    old, new], settings)\n\ncollection = client.get_collection(settings.collection)\n\nactive
+    = collection.get(\n    where={\"superseded\": False},\n    include=[\"metadatas\"]\n)\n\nassert
+    \"policy-v1\" not in active[\"ids\"]\nassert \"policy-v2\" in active[\"ids\"]\n\nprint(\"SUPERSEDED
+    VERSION EXCLUDED: PASS\", flush=True)\n\nprint(\"TEST 7: VERSION ROLLBACK\", flush=True)\n\nold.superseded
+    = False\nnew.superseded = True\n\nincremental_store([a, old, new], settings)\n\ncollection
+    = client.get_collection(settings.collection)\n\nactive = collection.get(\n    where={\"superseded\":
+    False},\n    include=[\"metadatas\"]\n)\n\nassert \"policy-v1\" in active[\"ids\"]\nassert
+    \"policy-v2\" not in active[\"ids\"]\n\nprint(\"PREVIOUS VERSION RESTORED: PASS\",
+    flush=True)\nprint(\"ALL SEVEN TESTS COMPLETED\", flush=True)\r\n"
 kind: ConfigMap
 metadata:
   name: a3-lifecycle-code
