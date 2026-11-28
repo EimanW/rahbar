@@ -100,6 +100,33 @@ write(
 )
 register("injection-test.txt", "Prompt injection test")
 
+original = (
+    source / "academic-rules-handbook-jun-2026.pdf"
+).read_bytes()
+
+(target / "truncated-handbook.pdf").write_bytes(
+    original[:len(original) // 2]
+)
+
+register(
+    "truncated-handbook.pdf",
+    "Truncated handbook test"
+)
+
+write(
+    "research-workshop.txt",
+    "Synthetic research workshop notice. "
+    "Participants should bring a notebook and laptop. "
+    "The workshop introduces research methodology, "
+    "literature review techniques and academic writing. "
+    "Participants will complete a practical exercise."
+)
+
+register(
+    "research-workshop.txt",
+    "Synthetic Research Workshop Notice"
+)
+
 (target / "_index.json").write_text(
     json.dumps(entries, indent=2),
     encoding="utf-8"
@@ -110,4 +137,5 @@ print("Total documents:", len(entries))
 
 for entry in entries:
     print(entry["file"])
+
 
