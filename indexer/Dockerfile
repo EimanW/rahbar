@@ -1,4 +1,4 @@
-# RAHBAR indexer, the Job's image and the only writer to Chroma.
+﻿# RAHBAR indexer, the Job's image and the only writer to Chroma.
 # Build context is the REPOSITORY ROOT, so the image can carry the corpus:
 #     docker build -f indexer/Dockerfile -t rahbar-indexer:dev .
 # What it carries (docs/PIPELINE.md, "How documents reach the Job"):
@@ -29,9 +29,11 @@ COPY eval/fixtures /fixtures
 # the trailing /. copies the folder's contents; an empty corpus/raw/.keep makes this
 # work on a fresh clone before anyone has run make fetch
 COPY corpus/raw/. /corpus/
+COPY corpus/batch_b/. /batch_b/
 
 RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin rahbar
 USER 10001
 
 # exec form; the Job's args choose --dummy or the real pipeline
 ENTRYPOINT ["python", "-m", "pipeline.run"]
+

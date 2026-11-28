@@ -1,0 +1,19 @@
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          securityContext:
+            fsGroup: 10001
+          containers:
+            - name: indexer
+              env:
+                - name: DATA_LAKE
+                  value: /data-lake
+              volumeMounts:
+                - name: data-lake
+                  mountPath: /data-lake
+          volumes:
+            - name: data-lake
+              persistentVolumeClaim:
+                claimName: rahbar-data-lake

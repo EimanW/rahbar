@@ -1,0 +1,62 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: a3-eval
+  namespace: rahbar
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 600
+  template:
+    metadata:
+      labels:
+        app: a3-eval
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+      containers:
+        - name: evaluator
+          image: rahbar-indexer:a3
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              set -e
+              mkdir -p /data-lake/eval
+              cp /code/* /data-lake/eval/
+              cd /data-lake
+              python eval/a3_suite.py
+              RESULT=$(ls -t eval/results/a3-*.json | grep -v gate.json | head -1)
+              python eval/gate.py "$RESULT" --config /gate/gate.yaml
+          env:
+            - name: EVAL_API
+              value: http://api-candidate:8000/api/ask
+            - name: PYTHONDONTWRITEBYTECODE
+              value: "1"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: code
+              mountPath: /code
+            - name: gate
+              mountPath: /gate
+            - name: data-lake
+              mountPath: /data-lake
+      volumes:
+        - name: code
+          configMap:
+            name: a3-eval-code
+        - name: gate
+          configMap:
+            name: a3-gate-config
+        - name: data-lake
+          persistentVolumeClaim:
+            claimName: rahbar-data-lake

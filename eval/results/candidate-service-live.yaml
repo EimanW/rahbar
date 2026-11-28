@@ -1,0 +1,28 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2026-11-27T17:36:43Z"
+  labels:
+    app: api-candidate
+  name: api-candidate
+  namespace: rahbar
+  resourceVersion: "14905"
+  uid: 1aa34574-4be3-48f3-840d-8c1880233d03
+spec:
+  clusterIP: 10.97.42.112
+  clusterIPs:
+  - 10.97.42.112
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: api-candidate
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

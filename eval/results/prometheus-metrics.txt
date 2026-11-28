@@ -1,0 +1,211 @@
+﻿# HELP python_gc_objects_collected_total Objects collected during gc
+# TYPE python_gc_objects_collected_total counter
+python_gc_objects_collected_total{generation="0"} 2608.0
+python_gc_objects_collected_total{generation="1"} 307.0
+python_gc_objects_collected_total{generation="2"} 0.0
+# HELP python_gc_objects_uncollectable_total Uncollectable objects found during GC
+# TYPE python_gc_objects_uncollectable_total counter
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+# HELP python_gc_collections_total Number of times this generation was collected
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 214.0
+python_gc_collections_total{generation="1"} 19.0
+python_gc_collections_total{generation="2"} 1.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="12",patchlevel="16",version="3.12.16"} 1.0
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 4.60681216e+08
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 9.947136e+07
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.79586993585e+09
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 4.04
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 12.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1.048576e+06
+# HELP rahbar_requests_total HTTP requests
+# TYPE rahbar_requests_total counter
+rahbar_requests_total{path="/healthz",status="200"} 11.0
+rahbar_requests_total{path="/readyz",status="200"} 21.0
+rahbar_requests_total{path="/metrics",status="200"} 1.0
+rahbar_requests_total{path="/api/ask",status="200"} 1.0
+# HELP rahbar_requests_created HTTP requests
+# TYPE rahbar_requests_created gauge
+rahbar_requests_created{path="/healthz",status="200"} 1.7958699511159067e+09
+rahbar_requests_created{path="/readyz",status="200"} 1.7958699511196704e+09
+rahbar_requests_created{path="/metrics",status="200"} 1.7958700907813609e+09
+rahbar_requests_created{path="/api/ask",status="200"} 1.795870150095331e+09
+# HELP rahbar_request_seconds HTTP request latency
+# TYPE rahbar_request_seconds histogram
+rahbar_request_seconds_bucket{le="0.05",path="/healthz"} 11.0
+rahbar_request_seconds_bucket{le="0.1",path="/healthz"} 11.0
+rahbar_request_seconds_bucket{le="0.25",path="/healthz"} 11.0
+rahbar_request_seconds_bucket{le="0.5",path="/healthz"} 11.0
+rahbar_request_seconds_bucket{le="1.0",path="/healthz"} 11.0
+rahbar_request_seconds_bucket{le="2.0",path="/healthz"} 11.0
+rahbar_request_seconds_bucket{le="5.0",path="/healthz"} 11.0
+rahbar_request_seconds_bucket{le="10.0",path="/healthz"} 11.0
+rahbar_request_seconds_bucket{le="30.0",path="/healthz"} 11.0
+rahbar_request_seconds_bucket{le="60.0",path="/healthz"} 11.0
+rahbar_request_seconds_bucket{le="+Inf",path="/healthz"} 11.0
+rahbar_request_seconds_count{path="/healthz"} 11.0
+rahbar_request_seconds_sum{path="/healthz"} 0.012638412000001154
+rahbar_request_seconds_bucket{le="0.05",path="/readyz"} 21.0
+rahbar_request_seconds_bucket{le="0.1",path="/readyz"} 21.0
+rahbar_request_seconds_bucket{le="0.25",path="/readyz"} 21.0
+rahbar_request_seconds_bucket{le="0.5",path="/readyz"} 21.0
+rahbar_request_seconds_bucket{le="1.0",path="/readyz"} 21.0
+rahbar_request_seconds_bucket{le="2.0",path="/readyz"} 21.0
+rahbar_request_seconds_bucket{le="5.0",path="/readyz"} 21.0
+rahbar_request_seconds_bucket{le="10.0",path="/readyz"} 21.0
+rahbar_request_seconds_bucket{le="30.0",path="/readyz"} 21.0
+rahbar_request_seconds_bucket{le="60.0",path="/readyz"} 21.0
+rahbar_request_seconds_bucket{le="+Inf",path="/readyz"} 21.0
+rahbar_request_seconds_count{path="/readyz"} 21.0
+rahbar_request_seconds_sum{path="/readyz"} 0.08867055499990784
+rahbar_request_seconds_bucket{le="0.05",path="/metrics"} 1.0
+rahbar_request_seconds_bucket{le="0.1",path="/metrics"} 1.0
+rahbar_request_seconds_bucket{le="0.25",path="/metrics"} 1.0
+rahbar_request_seconds_bucket{le="0.5",path="/metrics"} 1.0
+rahbar_request_seconds_bucket{le="1.0",path="/metrics"} 1.0
+rahbar_request_seconds_bucket{le="2.0",path="/metrics"} 1.0
+rahbar_request_seconds_bucket{le="5.0",path="/metrics"} 1.0
+rahbar_request_seconds_bucket{le="10.0",path="/metrics"} 1.0
+rahbar_request_seconds_bucket{le="30.0",path="/metrics"} 1.0
+rahbar_request_seconds_bucket{le="60.0",path="/metrics"} 1.0
+rahbar_request_seconds_bucket{le="+Inf",path="/metrics"} 1.0
+rahbar_request_seconds_count{path="/metrics"} 1.0
+rahbar_request_seconds_sum{path="/metrics"} 0.015769020999982786
+rahbar_request_seconds_bucket{le="0.05",path="/api/ask"} 0.0
+rahbar_request_seconds_bucket{le="0.1",path="/api/ask"} 0.0
+rahbar_request_seconds_bucket{le="0.25",path="/api/ask"} 0.0
+rahbar_request_seconds_bucket{le="0.5",path="/api/ask"} 1.0
+rahbar_request_seconds_bucket{le="1.0",path="/api/ask"} 1.0
+rahbar_request_seconds_bucket{le="2.0",path="/api/ask"} 1.0
+rahbar_request_seconds_bucket{le="5.0",path="/api/ask"} 1.0
+rahbar_request_seconds_bucket{le="10.0",path="/api/ask"} 1.0
+rahbar_request_seconds_bucket{le="30.0",path="/api/ask"} 1.0
+rahbar_request_seconds_bucket{le="60.0",path="/api/ask"} 1.0
+rahbar_request_seconds_bucket{le="+Inf",path="/api/ask"} 1.0
+rahbar_request_seconds_count{path="/api/ask"} 1.0
+rahbar_request_seconds_sum{path="/api/ask"} 0.26105717300004017
+# HELP rahbar_request_seconds_created HTTP request latency
+# TYPE rahbar_request_seconds_created gauge
+rahbar_request_seconds_created{path="/healthz"} 1.7958699511159258e+09
+rahbar_request_seconds_created{path="/readyz"} 1.7958699511196856e+09
+rahbar_request_seconds_created{path="/metrics"} 1.7958700907813804e+09
+rahbar_request_seconds_created{path="/api/ask"} 1.7958701500953472e+09
+# HELP rahbar_retrieval_seconds Embed + Chroma query time
+# TYPE rahbar_retrieval_seconds histogram
+rahbar_retrieval_seconds_bucket{le="0.01"} 0.0
+rahbar_retrieval_seconds_bucket{le="0.05"} 0.0
+rahbar_retrieval_seconds_bucket{le="0.1"} 0.0
+rahbar_retrieval_seconds_bucket{le="0.25"} 1.0
+rahbar_retrieval_seconds_bucket{le="0.5"} 1.0
+rahbar_retrieval_seconds_bucket{le="1.0"} 1.0
+rahbar_retrieval_seconds_bucket{le="2.0"} 1.0
+rahbar_retrieval_seconds_bucket{le="5.0"} 1.0
+rahbar_retrieval_seconds_bucket{le="10.0"} 1.0
+rahbar_retrieval_seconds_bucket{le="30.0"} 1.0
+rahbar_retrieval_seconds_bucket{le="60.0"} 1.0
+rahbar_retrieval_seconds_bucket{le="120.0"} 1.0
+rahbar_retrieval_seconds_bucket{le="+Inf"} 1.0
+rahbar_retrieval_seconds_count 1.0
+rahbar_retrieval_seconds_sum 0.24651013999999805
+# HELP rahbar_retrieval_seconds_created Embed + Chroma query time
+# TYPE rahbar_retrieval_seconds_created gauge
+rahbar_retrieval_seconds_created 1.795869945137075e+09
+# HELP rahbar_generation_seconds LLM time incl. one retry
+# TYPE rahbar_generation_seconds histogram
+rahbar_generation_seconds_bucket{le="0.01"} 1.0
+rahbar_generation_seconds_bucket{le="0.05"} 1.0
+rahbar_generation_seconds_bucket{le="0.1"} 1.0
+rahbar_generation_seconds_bucket{le="0.25"} 1.0
+rahbar_generation_seconds_bucket{le="0.5"} 1.0
+rahbar_generation_seconds_bucket{le="1.0"} 1.0
+rahbar_generation_seconds_bucket{le="2.0"} 1.0
+rahbar_generation_seconds_bucket{le="5.0"} 1.0
+rahbar_generation_seconds_bucket{le="10.0"} 1.0
+rahbar_generation_seconds_bucket{le="30.0"} 1.0
+rahbar_generation_seconds_bucket{le="60.0"} 1.0
+rahbar_generation_seconds_bucket{le="120.0"} 1.0
+rahbar_generation_seconds_bucket{le="+Inf"} 1.0
+rahbar_generation_seconds_count 1.0
+rahbar_generation_seconds_sum 0.00027909800002134943
+# HELP rahbar_generation_seconds_created LLM time incl. one retry
+# TYPE rahbar_generation_seconds_created gauge
+rahbar_generation_seconds_created 1.7958699451371088e+09
+# HELP rahbar_cache_lookups_total Semantic cache lookups
+# TYPE rahbar_cache_lookups_total counter
+rahbar_cache_lookups_total{result="miss"} 1.0
+# HELP rahbar_cache_lookups_created Semantic cache lookups
+# TYPE rahbar_cache_lookups_created gauge
+rahbar_cache_lookups_created{result="miss"} 1.7958701498628228e+09
+# HELP rahbar_abstentions_total Answers with answered_from_context=false
+# TYPE rahbar_abstentions_total counter
+# HELP rahbar_fallbacks_total Canned answers after two invalid replies
+# TYPE rahbar_fallbacks_total counter
+rahbar_fallbacks_total 0.0
+# HELP rahbar_fallbacks_created Canned answers after two invalid replies
+# TYPE rahbar_fallbacks_created gauge
+rahbar_fallbacks_created 1.795869945137145e+09
+# HELP rahbar_generation_retries_total Second attempts after invalid output
+# TYPE rahbar_generation_retries_total counter
+rahbar_generation_retries_total 0.0
+# HELP rahbar_generation_retries_created Second attempts after invalid output
+# TYPE rahbar_generation_retries_created gauge
+rahbar_generation_retries_created 1.7958699451371515e+09
+# HELP rahbar_citations_removed_total Model citations dropped because nothing retrieved matched them
+# TYPE rahbar_citations_removed_total counter
+rahbar_citations_removed_total 0.0
+# HELP rahbar_citations_removed_created Model citations dropped because nothing retrieved matched them
+# TYPE rahbar_citations_removed_created gauge
+rahbar_citations_removed_created 1.795869945137157e+09
+# HELP rahbar_tokens_total LLM tokens
+# TYPE rahbar_tokens_total counter
+rahbar_tokens_total{direction="in"} 49.0
+rahbar_tokens_total{direction="out"} 31.0
+# HELP rahbar_tokens_created LLM tokens
+# TYPE rahbar_tokens_created gauge
+rahbar_tokens_created{direction="in"} 1.7958701500882342e+09
+rahbar_tokens_created{direction="out"} 1.7958701500882423e+09
+# HELP rahbar_tokens_per_request LLM tokens per request
+# TYPE rahbar_tokens_per_request histogram
+rahbar_tokens_per_request_bucket{direction="in",le="50.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="in",le="100.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="in",le="250.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="in",le="500.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="in",le="1000.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="in",le="2000.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="in",le="4000.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="in",le="8000.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="in",le="+Inf"} 1.0
+rahbar_tokens_per_request_count{direction="in"} 1.0
+rahbar_tokens_per_request_sum{direction="in"} 49.0
+rahbar_tokens_per_request_bucket{direction="out",le="50.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="out",le="100.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="out",le="250.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="out",le="500.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="out",le="1000.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="out",le="2000.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="out",le="4000.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="out",le="8000.0"} 1.0
+rahbar_tokens_per_request_bucket{direction="out",le="+Inf"} 1.0
+rahbar_tokens_per_request_count{direction="out"} 1.0
+rahbar_tokens_per_request_sum{direction="out"} 31.0
+# HELP rahbar_tokens_per_request_created LLM tokens per request
+# TYPE rahbar_tokens_per_request_created gauge
+rahbar_tokens_per_request_created{direction="in"} 1.7958701500882556e+09
+rahbar_tokens_per_request_created{direction="out"} 1.795870150088277e+09
+

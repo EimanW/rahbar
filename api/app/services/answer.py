@@ -17,6 +17,7 @@ from __future__ import annotations
 import logging
 import time
 from typing import Literal
+from uuid import uuid4
 
 from ..config import Settings
 from ..logjson import request_id_var
@@ -27,6 +28,8 @@ from ..schemas import AskResponse, Citation, Passage, RetrievedRef
 from .cache import SemanticCache, is_cacheable, is_followup
 from .citations import filter_citations
 from .generation import generate
+from .tracing import new_trace, reject_instructions, write_trace
+from ..retrieval.chroma import wants_older_version
 
 log = logging.getLogger("rahbar.answer")
 
@@ -44,12 +47,35 @@ def _refs(passages: list[Passage]) -> list[RetrievedRef]:
 def answer_question(question: str, retriever: Retriever, provider: LLMProvider,
                     settings: Settings, cache: SemanticCache | None = None) -> AskResponse:
     rid = request_id_var.get()
+    trace = new_trace(rid if rid != "-" else uuid4().hex, question, settings, provider.name)
+    started = time.perf_counter()
+    try:
+        if retriever.name == "chroma":
+            trace["collection_version"] = retriever.index_version()
+        response = _answer_question(question, retriever, provider, settings, cache, trace)
+        trace["response"] = response.model_dump()
+        trace["citations"] = trace["response"]["citations"]
+        return response
+    except Exception as exc:
+        trace["error"] = type(exc).__name__
+        raise
+    finally:
+        trace["latency_ms"]["total"] = (time.perf_counter() - started) * 1000
+        write_trace(trace)
+
+
+def _answer_question(question, retriever, provider, settings, cache, trace) -> AskResponse:
+    rid = trace["trace_id"]
+    latency = trace["latency_ms"]
+    actions = trace["guardrail_actions"]
     followup = is_followup(question)
 
     # 2-3. embed once; the same vector serves the cache and retrieval
     started = time.perf_counter()
     vector = retriever.embed(question)
+    latency["embedding"] = (time.perf_counter() - started) * 1000
     namespace = None
+    cache_started = time.perf_counter()
     if cache is not None and not followup:
         namespace = cache.namespace(retriever.index_version(), settings.embed_model)
         try:
@@ -58,7 +84,10 @@ def answer_question(question: str, retriever: Retriever, provider: LLMProvider,
             log.warning("cache lookup failed", extra={"error": str(exc)})
             hit, similarity = None, 0.0
         m.CACHE_LOOKUPS.labels(result="hit" if hit else "miss").inc()
+        latency["cache_lookup"] = (time.perf_counter() - cache_started) * 1000
+        trace["cache"] = "hit" if hit else "miss"
         if hit:
+            trace["cached_from_trace_id"] = hit.get("origin_trace_id")
             log.info("answered", extra={"cache": "hit", "similarity": round(similarity, 4),
                                         "answered_from_context": hit["answered_from_context"]})
             return AskResponse(**{**hit, "request_id": rid, "cached": True})
@@ -66,10 +95,22 @@ def answer_question(question: str, retriever: Retriever, provider: LLMProvider,
         m.CACHE_LOOKUPS.labels(result="skipped_followup").inc()
 
     # 4. retrieve, then the relevance floor
+    trace["filters"] = {
+        "superseded": False if retriever.name == "chroma" and settings.filter_superseded
+        and not wants_older_version(question) else None,
+        "relevance_floor": settings.relevance_floor,
+    }
+    retrieval_started = time.perf_counter()
     passages = retriever.retrieve(question, k=settings.top_k, vector=vector)
     m.RETRIEVAL_SECONDS.observe(time.perf_counter() - started)
+    latency["retrieval"] = (time.perf_counter() - retrieval_started) * 1000
+    trace["retrieved"] = [p.model_dump(exclude={"text"}) for p in passages]
+    trace["reranked_order"] = [p.chunk_id for p in passages]
     best = max((p.score for p in passages), default=0.0)
-    relevant = [p for p in passages if p.score >= settings.relevance_floor]
+    guardrail_started = time.perf_counter()
+    relevant = reject_instructions(passages, settings.relevance_floor, actions)
+    trace["context"] = [p.model_dump() for p in relevant]
+    latency["guardrails"] = (time.perf_counter() - guardrail_started) * 1000
 
     fallback = retried = False
     removed = 0
@@ -77,12 +118,14 @@ def answer_question(question: str, retriever: Retriever, provider: LLMProvider,
     confidence: Literal["high", "medium", "low"]
     tokens_in = tokens_out = 0
     if not relevant:
-        abstain_reason = "below_floor"
+        abstain_reason = "retrieval_guardrail" if actions else "below_floor"
         answer_text, citations, from_context, confidence = NOT_COVERED, [], False, "low"
     else:
         # 5-7. augment, generate, validate (retry + fallback inside generate)
         g_started = time.perf_counter()
         result = generate(provider, question, relevant, settings.temperature)
+        trace["prompts"] = result.prompts
+        latency["generation"] = (time.perf_counter() - g_started) * 1000
         m.GENERATION_SECONDS.observe(time.perf_counter() - g_started)
         fallback, retried = result.fallback, result.retried
         tokens_in, tokens_out = result.tokens_in, result.tokens_out
@@ -97,6 +140,9 @@ def answer_question(question: str, retriever: Retriever, provider: LLMProvider,
         if not from_context:
             citations = []
 
+    trace["abstain_reason"] = abstain_reason or None
+    if removed:
+        actions.append({"action": "drop_invalid_citations", "count": removed})
     if not from_context:
         m.ABSTENTIONS.labels(reason=abstain_reason).inc()
     if fallback:
@@ -131,7 +177,7 @@ def answer_question(question: str, retriever: Retriever, provider: LLMProvider,
         body = response.model_dump(exclude={"request_id", "cached"})
         if is_cacheable(question, body, fallback, citations_ok=removed == 0):
             try:
-                cache.store(namespace, question, vector, body)
+                cache.store(namespace, question, vector, {**body, "origin_trace_id": rid})
             except Exception as exc:
                 log.warning("cache store failed", extra={"error": str(exc)})
     return response
