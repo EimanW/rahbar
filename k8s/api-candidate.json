@@ -26,6 +26,9 @@
                               },
                  "template":  {
                                   "metadata":  {
+                                                   "annotations":  {
+                                                                       "kubectl.kubernetes.io/restartedAt":  "2026-11-27T23:09:28+05:00"
+                                                                   },
                                                    "labels":  {
                                                                   "app":  "api-candidate",
                                                                   "app.kubernetes.io/part-of":  "rahbar"
@@ -47,16 +50,20 @@
                                                                                                     }
                                                                                   },
                                                                                   {
-                                                                                      "value":  "0.30",
-                                                                                      "name":  "RELEVANCE_FLOOR"
+                                                                                      "name":  "RELEVANCE_FLOOR",
+                                                                                      "value":  "0.30"
                                                                                   },
                                                                                   {
-                                                                                      "value":  "rahbar-a3",
-                                                                                      "name":  "CHROMA_COLLECTION"
+                                                                                      "name":  "CHROMA_COLLECTION",
+                                                                                      "value":  "rahbar-a3-candidate"
                                                                                   },
                                                                                   {
-                                                                                      "value":  "/traces/candidate.jsonl",
-                                                                                      "name":  "TRACE_FILE"
+                                                                                      "name":  "TRACE_FILE",
+                                                                                      "value":  "/traces/candidate.jsonl"
+                                                                                  },
+                                                                                  {
+                                                                                      "name":  "CACHE_THRESHOLD",
+                                                                                      "value":  "1.01"
                                                                                   }
                                                                               ],
                                                                       "envFrom":  [
