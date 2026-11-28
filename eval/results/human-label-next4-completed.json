@@ -1,0 +1,267 @@
+[
+    {
+        "trace_id": "15a24b2cc6154c67aaee2461e365fc32",
+        "question": "What happens if my CGPA stays below 2.00 for three semesters in a row?",
+        "answer": "I found related passages, but none of them supports a definite answer, so I won't guess.",
+        "context": [
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0118",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 5.5 If at the end of a semester (including summer semester) CGPA]\ndrops below 2.00, warning is issued, and warning count is incremented by one. 5.6 If CGPA remains below 2.00 for 3 consecutive semesters, warning count becomes three and the admission of student at the University is automatically closed. | 18 | Undergraduate Academic Rules and Regulations 2026 | 5. Academic Assessment 5.7 If the CGPA equals or exceeds 2.00 after the 1st or 2nd academic warning, the warning count is reset to zero.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "5.5 If at the end of a semester (including summer semester) CGPA",
+                "page": 24,
+                "score": 0.7968,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0088",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 3.28 If the CGPA of an undergraduate student fall below the]\nfull details to the Controller of Examinations for approval. acceptable threshold of 2.00 for third consecutive semester, then his/her admission is closed. Transfer to another FAST-NUCES campus",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "3.28 If the CGPA of an undergraduate student fall below the",
+                "page": 17,
+                "score": 0.7602,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0119",
+                "text": "[academic-rules-handbook-jun-2026.pdf | Repeating a Course]\nthrough midterm exams, assignments, quizzes, case studies or any other method considered appropriate by the course 5.8 Any failed or missed course from a previous semester should instructor and the University and communicated to the become mandatory in the subsequent semester (if Offered), students at the start of a course. and students should not be allowed to skip its registration. 5.2 The semester work will normally contribute 50% towards the 5.9 A student may repeat any course to improve CGPA. final grade, while the final examination will contribute the remaining 50% of the total marks. A letter grade will be 5.10 When a student repeats a course whose post-requisite awarded to each student based on his/her overall academic course(s) s/he has passed, s/he must give a written performance in a course. undertaking that if s/he fails the course, grades in all postrequisite courses will be changed to F grade. 5.3 Any deviation from Rule 5.2 above if necessitated by the nature of course will be made with the approval of Dean of the 5.11 If a student repeats a failed course, the new grade will be used Faculty. for CGPA calculation, but if a student takes a new course in lieu of the course in which s/he failed, both the grades will be Academic Warning/Probation used for CGPA calculation. 5.4 Minimum CGPA required to avoid academic warning is 2.00 Late conduct of Examination/ Missed Examination for all undergraduate programs. 5.12 A student is expected to take mid and final examination as per 5.5 If at the end of a semester (including summer semester) CGPA the announced schedule by the department. For more details, drops below 2.00, warning is issued, and warning count is please see Policy on Retake Examinations (Section 9). incremented by one.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Repeating a Course",
+                "page": 25,
+                "score": 0.7254,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "grading-page-html-0005",
+                "text": "[grading-page.html | Warning/Probation]\nAt the end of every semester (including the first semester and summer semesters), warning is issued provided the CGPA of a student is less than the minimum required for the degree program. A student with a warning cannot register in a subsequent semester without approval of the relevant Head of Department or any other senior faculty nominated by him. After each semester (including the summer or the first semester), if the CGPA of a student is less than the required minimum, the Warning Count increases by one. If Warning Count becomes three, the admission of student at the University is closed. If the CGPA equals or exceeds the required minimum, the Warning Count becomes zero. | Programs | Minimum CGPA required to avoid Warning |",
+                "source": "grading-page.html",
+                "section": "Warning/Probation",
+                "page": 1,
+                "score": 0.7675,
+                "doc_id": "grading-page.html",
+                "doc_version": "2026",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0062",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 2.6 CGPA is calculated as the weighted average for all semesters]\ncumulatively using grade points of all the courses taken by a student. 2.7 In CGPA calculation for the courses that have been repeated, | Grade | Points | Grade | Points | | A+ | 4.00 | C+ | 2.33 | | A | 4.00 | C | 2.00 | | A- | 3.67 | C- | 1.67 | | B+ | 3.33 | D+ | 1.33 | | B | 3.00 | D | 1.00 | | B- | 2.67 | F | 0.00 | | 6 | Undergraduate Academic Rules and Regulations 2026 | Grade Points only the most recent grade points are used, even if they are less than the earlier attempts. 2.3 The points for each letter grade are given as follows: 2.8 “W” will be awarded for withdrawn courses. It will appear on the Grade Points Grade Points transcript. However, it will not affect the CGPA. A+ 4.00 C+ 2.33 2.9 “I” is a temporary grade given for incomplete work. If it is not changed to an earned grade, it shall automatically convert to A 4.00 C 2.00 F grade after a fixed time set by the competent authority. A- 3.67 C- 1.67 2.10 F/A grade in the transcript implies that the student fails to appear in the final examination. B+ 3.33 D+ 1.33 2.11 For PhD. thesis 1-IV, a student will be assigned either B 3.00 D 1.00 “Satisfactory” (S) or Unsatisfactory (U) grade. B- 2.67 F 0.00",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "2.6 CGPA is calculated as the weighted average for all semesters",
+                "page": 12,
+                "score": 0.7051,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            }
+        ],
+        "citations": [],
+        "answered_from_context": false,
+        "human_label": 0,
+        "human_reason": "Refusal NOT justified: chunk 0118 (p.24, clause 5.6) states that if CGPA stays below 2.00 for 3 consecutive semesters the admission is automatically closed, and chunk 0088 (clause 3.28) says the same. The claim that no passage supports an answer is contradicted by the context."
+    },
+    {
+        "trace_id": "d0cfa9c78e9e466e86615d582654e9ec",
+        "question": "According to the previous 2023 rules, how many semesters could a student freeze?",
+        "answer": "2",
+        "context": [
+            {
+                "chunk_id": "undergraduate-academic-rules-aug-2023-pdf-0046",
+                "text": "[undergraduate-academic-rules-aug-2023.pdf | 4.18 Astudent may request freezing of his/her admission for up to 2]\nsemesters along with prescribed 'Semester Freeze' charges. Freezing of first* two semester of BS degree are not allowed.",
+                "source": "undergraduate-academic-rules-aug-2023.pdf",
+                "section": "4.18 Astudent may request freezing of his/her admission for up to 2",
+                "page": 15,
+                "score": 0.8059,
+                "doc_id": "undergraduate-academic-rules-aug-2023.pdf",
+                "doc_version": "2023-08",
+                "superseded": true
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0102",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 4.18 A student may request freezing of his/her admission for up to]\n2 semesters along with prescribed ‘Semester Freeze’ charges. Freezing of first* two semester of BS degree are not allowed. *Freezing of first semester is allowed for extreme hardship cases by Competent Authority. Such as Iddat, Maternity/Delivery, Death in the immediate family member, and any other subject to acceptance on justified rationale",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "4.18 A student may request freezing of his/her admission for up to",
+                "page": 22,
+                "score": 0.8141,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "undergraduate-academic-rules-aug-2023-pdf-0047",
+                "text": "[undergraduate-academic-rules-aug-2023.pdf | 10 FAST-NUCES]\n*Freezing of first semester is allowed for extreme hardship cases by competent authority. Hardship cases, Iddat, Maternity, Death in the family, Medical condition.",
+                "source": "undergraduate-academic-rules-aug-2023.pdf",
+                "section": "10 FAST-NUCES",
+                "page": 15,
+                "score": 0.7632,
+                "doc_id": "undergraduate-academic-rules-aug-2023.pdf",
+                "doc_version": "2023-08",
+                "superseded": true
+            },
+            {
+                "chunk_id": "prospectus-2026-academic-rules-and-regulations-pdf-0007",
+                "text": "[prospectus-2026-academic-rules-and-regulations.pdf | 13. Registration of Students under]\ndoubled to ensure that repeat count appears on the the course is completely transcript for all repeated Transfer shall not be considered taught in summer (with half courses. in the following cases: the duration as compared to a) The student is under 18. Missed Examinations a regular semester). disciplinary punishment. A student who misses a quiz or d) Research courses or projects b) Disciplinary action is pending assignment is awarded zero against the student. will not be offered. marks in that quiz or assignment. c) Dues are outstanding against e) A student will be allowed to However, for midterms and final the student. examination there is a provision repeat a maximum of 2 d) During the semester. for a retake, in case of student's courses (with associated labs illness or serious accident or if any). 21. Semester Freeze death in the immediate family. A U n d e r e x c e p t i o n a l f) 80% attendance rule shall Faculty Committee shall examine circumstances a student may a p p l y t o s u m m e r the request of the student for a take a semester off by requesting courses/labs. repeat test/exam. the Campus Director for a If retake of final exam is allowed, g) A student can withdraw from 'Semester Freeze'. A semester it shall be held as soon as a summer course on or freeze fee must be paid. Freezing possible, but not later than one before the last day of classes. of first two semesters for BS and week before the start of next h) Summer courses cannot be first semester for MS/PhD is not semester.",
+                "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+                "section": "13. Registration of Students under",
+                "page": 2,
+                "score": 0.8088,
+                "doc_id": "prospectus-2026-academic-rules-and-regulations.pdf",
+                "doc_version": "2026",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0108",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 4.26 Students on any form of financial support are not allowed to]\n2 semesters along with prescribed ‘Semester Freeze’ charges. withdraw from any course. Freezing of first* two semester of BS degree are not allowed. *Freezing of first semester is allowed for extreme hardship cases by Course Replacement Policy Competent Authority. Such as Iddat, Maternity/Delivery, Death in the immediate family member, and any other subject to acceptance on justified",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "4.26 Students on any form of financial support are not allowed to",
+                "page": 23,
+                "score": 0.8023,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            }
+        ],
+        "citations": [
+            {
+                "source": "undergraduate-academic-rules-aug-2023.pdf",
+                "section": "4.18 Astudent may request freezing of his/her admission for up to 2",
+                "page": 15
+            }
+        ],
+        "answered_from_context": true,
+        "human_label": 1,
+        "human_reason": "Supported: chunk 0046 (2023 rules, p.15, clause 4.18) says up to 2 semesters. It correctly uses and cites the superseded 2023 edition, which the question asks for."
+    },
+    {
+        "trace_id": "42b0af0be8634942b5166071b7500071",
+        "question": "What does clause 5.4 say about academic warning?",
+        "answer": "A student must register for all such courses, in which the grade was F, provided these courses are being offered.",
+        "context": [
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0117",
+                "text": "[academic-rules-handbook-jun-2026.pdf | Academic Warning/Probation]\n5.4 Minimum CGPA required to avoid academic warning is 2.00 for all undergraduate programs.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Academic Warning/Probation",
+                "page": 24,
+                "score": 0.7178,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0095",
+                "text": "[academic-rules-handbook-jun-2026.pdf | Registration of Students under Academic Warning]\n4.4 A student under academic warning or probation: a) Must register for all such courses, in which the grade was F, provided these courses are being offered. b) Should register for all such courses, in which the grade was D, D+ or C-, provided these courses are being offered. c) Should not register for more than five courses. d) Parents/guardian will be called to the campus for a meeting with the HoD for sharing the unsatisfactory | | Undergraduate Academic Rules and Regulations 2026 | 13 | academic performance of the student. e) Students on 2nd academic warning must NOT register for a new course, unless recommended by the HoD and approved by Controller of Examinations. Registration of courses with Theory and associated Lab: 4.5 A student must register for both the Theory and Lab part of a course.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Registration of Students under Academic Warning",
+                "page": 19,
+                "score": 0.7316,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0118",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 5.5 If at the end of a semester (including summer semester) CGPA]\ndrops below 2.00, warning is issued, and warning count is incremented by one. 5.6 If CGPA remains below 2.00 for 3 consecutive semesters, warning count becomes three and the admission of student at the University is automatically closed. | 18 | Undergraduate Academic Rules and Regulations 2026 | 5. Academic Assessment 5.7 If the CGPA equals or exceeds 2.00 after the 1st or 2nd academic warning, the warning count is reset to zero.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "5.5 If at the end of a semester (including summer semester) CGPA",
+                "page": 24,
+                "score": 0.7243,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0014",
+                "text": "[academic-rules-handbook-jun-2026.pdf | Academic Warning/Probation 18 1. Medium of Instruction]\nRepeating a Course 19 Late conduct of Examination/ Missed Examination 19",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Academic Warning/Probation 18 1. Medium of Instruction",
+                "page": 6,
+                "score": 0.7229,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0024",
+                "text": "[academic-rules-handbook-jun-2026.pdf | Academic Warning/Probation 18 1. Medium of Instruction]\nRepeating a Course 19 Late conduct of Examination/ Missed Examination 19",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Academic Warning/Probation 18 1. Medium of Instruction",
+                "page": 7,
+                "score": 0.7229,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            }
+        ],
+        "citations": [],
+        "answered_from_context": false,
+        "human_label": 0,
+        "human_reason": "Unsupported as an answer to the question: the sentence is copied from clause 4.4 (chunk 0095), not clause 5.4. Chunk 0117 shows clause 5.4 says the minimum CGPA to avoid warning is 2.00, so presenting 4.4 text as clause 5.4 is contradicted. Also inconsistent: answered_from_context is false and there are no citations, yet an answer is given."
+    },
+    {
+        "trace_id": "1d8c6b0a11f241cc98b23b4a976d1fcd",
+        "question": "What is the tuition fee per credit hour for a BS student in 2026-27?",
+        "answer": "Rs. 12,000",
+        "context": [
+            {
+                "chunk_id": "fee-structure-page-html-0004",
+                "text": "[fee-structure-page.html | Tuition Fee (w.e.f. Fall 2026 semester)]\nTuition Fee is payable in full before the start of each semester. Annual revision will be applicable as per University Internal Rules. For the academic year 2026-27 the tuition fee per credit hour applicable to all batches is as follows: | Program | Fee | | BBA / BS | Rs. 12,000 | | MBA / MS | Rs. 12,000 | | PhD | Rs. 12,000 |",
+                "source": "fee-structure-page.html",
+                "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+                "page": 1,
+                "score": 0.8235,
+                "doc_id": "fee-structure-page.html",
+                "doc_version": "2026-27",
+                "superseded": false
+            },
+            {
+                "chunk_id": "student-handbook-jun-2026-pdf-0049",
+                "text": "[student-handbook-jun-2026.pdf | Internal Scholarships]\nfor full tuition fee. undergraduate degree and 2.5 for graduate degree. A student registering for less or more credit hours than the total The repayment of loan starts three months after graduation or specified number of credit hours shall not be eligible for Merit getting a job, whichever is earlier. The total amount must be Scholarship. Student must not have failed, repeated or repaid within a period of four years after graduation. Students are withdrawn from a course in that semester required to sign to this effect. If there are more than one student in the same position, the next All those who are admitted and are in real need of financial position will automatically be vanished or moved down assistance should apply on the prescribed Financial Aid form. A depending on the number of students in one position. notice to this effect will be posted on the notice board. | 10 | Student Handbook 2026 | |",
+                "source": "student-handbook-jun-2026.pdf",
+                "section": "Internal Scholarships",
+                "page": 18,
+                "score": 0.7049,
+                "doc_id": "student-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0053",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 1.24 When a student is readmitted with credit exemptions from a]\nprevious admission, the maximum duration allowed to complete the degree will be counted from the date of first admission. 1.25 Minimum Cumulative Grade Point Average (CGPA) of 2.00 is required for graduation. | 4 | Undergraduate Academic Rules and Regulations 2026 |",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "1.24 When a student is readmitted with credit exemptions from a",
+                "page": 10,
+                "score": 0.6847,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0149",
+                "text": "[academic-rules-handbook-jun-2026.pdf | Rector’s List of Honors]\n7.3 Students earning an SGPA of 4.00 with at least 30 credit hours shall be included in a prestigious list called Rector’s List of | 24 | Undergraduate Academic Rules and Regulations 2026 | 7. Graduation Awards Honors.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Rector’s List of Honors",
+                "page": 30,
+                "score": 0.6782,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            }
+        ],
+        "citations": [
+            {
+                "source": "fee-structure-page.html",
+                "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+                "page": 1
+            }
+        ],
+        "answered_from_context": true,
+        "human_label": 1,
+        "human_reason": "Supported: chunk fee-structure-page-html-0004 states Rs. 12,000 per credit hour for BBA/BS in 2026-27, and it is cited."
+    }
+]

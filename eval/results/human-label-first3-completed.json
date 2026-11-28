@@ -1,0 +1,220 @@
+[
+    {
+        "trace_id": "8022954a86c14b16be742aadab090ba5",
+        "question": "What is the minimum CGPA required for graduation?",
+        "answer": "2.00",
+        "context": [
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0059",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 1.24 When a student is readmitted with credit exemptions from a]\nprevious admission, the maximum duration allowed to complete the degree will be counted from the date of first admission. 1.25 Minimum Cumulative Grade Point Average (CGPA) of 2.00 is required for graduation. | Grade | Interpretation | | A+ | Outstanding | | A, A- | Excellent | | B+, B, B- | Good | | C+, C | Adequate | | C-, D+, D | Pass, the student may repeat the course | | F | Fail | | FA | Fail due to shortage of attendance | | I | Incomplete | | W | Withdrawn | | S | Satisfactory | | U | Unsatisfactory | | | U ndergraduate Academic Rules and Regulations 2026 | 5 |",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "1.24 When a student is readmitted with credit exemptions from a",
+                "page": 11,
+                "score": 0.8119,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0053",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 1.24 When a student is readmitted with credit exemptions from a]\nprevious admission, the maximum duration allowed to complete the degree will be counted from the date of first admission. 1.25 Minimum Cumulative Grade Point Average (CGPA) of 2.00 is required for graduation. | 4 | Undergraduate Academic Rules and Regulations 2026 |",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "1.24 When a student is readmitted with credit exemptions from a",
+                "page": 10,
+                "score": 0.7971,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0147",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 7.1 Following awards have been approved to honor outstanding]\nstudents of the University. These medals will be awarded to position holders of each degree program upon graduation at each campus. To qualify for the medal, minimum CGPA required is 3.00 for undergraduate programs: a) Agha Hasan Abedi Gold Medal awarded for First position b) Mahboob ul Haq Silver Medal awarded for Second position c) Akhlaque Hussain Bronze Medal awarded for Third position",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "7.1 Following awards have been approved to honor outstanding",
+                "page": 30,
+                "score": 0.7921,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0117",
+                "text": "[academic-rules-handbook-jun-2026.pdf | Academic Warning/Probation]\n5.4 Minimum CGPA required to avoid academic warning is 2.00 for all undergraduate programs.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Academic Warning/Probation",
+                "page": 24,
+                "score": 0.7668,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "grading-page-html-0005",
+                "text": "[grading-page.html | Warning/Probation]\nAt the end of every semester (including the first semester and summer semesters), warning is issued provided the CGPA of a student is less than the minimum required for the degree program. A student with a warning cannot register in a subsequent semester without approval of the relevant Head of Department or any other senior faculty nominated by him. After each semester (including the summer or the first semester), if the CGPA of a student is less than the required minimum, the Warning Count increases by one. If Warning Count becomes three, the admission of student at the University is closed. If the CGPA equals or exceeds the required minimum, the Warning Count becomes zero. | Programs | Minimum CGPA required to avoid Warning |",
+                "source": "grading-page.html",
+                "section": "Warning/Probation",
+                "page": 1,
+                "score": 0.7575,
+                "doc_id": "grading-page.html",
+                "doc_version": "2026",
+                "superseded": false
+            }
+        ],
+        "citations": [
+            {
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Academic Warning/Probation",
+                "page": 24
+            },
+            {
+                "source": "grading-page.html",
+                "section": "Warning/Probation",
+                "page": 1
+            }
+        ],
+        "human_label": 1,
+        "human_reason": "Supported: chunk 0059 (p.11) states clause 1.25, CGPA 2.00 required for graduation. Note: the citations point to the academic warning rule, not clause 1.25, so the claim is faithful but the citation is weak."
+    },
+    {
+        "trace_id": "81bea4b9c94e442ca2832a38b0fbe588",
+        "question": "What CGPA do I need to keep to avoid an academic warning?",
+        "answer": "2.00",
+        "context": [
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0117",
+                "text": "[academic-rules-handbook-jun-2026.pdf | Academic Warning/Probation]\n5.4 Minimum CGPA required to avoid academic warning is 2.00 for all undergraduate programs.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Academic Warning/Probation",
+                "page": 24,
+                "score": 0.8615,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0118",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 5.5 If at the end of a semester (including summer semester) CGPA]\ndrops below 2.00, warning is issued, and warning count is incremented by one. 5.6 If CGPA remains below 2.00 for 3 consecutive semesters, warning count becomes three and the admission of student at the University is automatically closed. | 18 | Undergraduate Academic Rules and Regulations 2026 | 5. Academic Assessment 5.7 If the CGPA equals or exceeds 2.00 after the 1st or 2nd academic warning, the warning count is reset to zero.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "5.5 If at the end of a semester (including summer semester) CGPA",
+                "page": 24,
+                "score": 0.8235,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "grading-page-html-0005",
+                "text": "[grading-page.html | Warning/Probation]\nAt the end of every semester (including the first semester and summer semesters), warning is issued provided the CGPA of a student is less than the minimum required for the degree program. A student with a warning cannot register in a subsequent semester without approval of the relevant Head of Department or any other senior faculty nominated by him. After each semester (including the summer or the first semester), if the CGPA of a student is less than the required minimum, the Warning Count increases by one. If Warning Count becomes three, the admission of student at the University is closed. If the CGPA equals or exceeds the required minimum, the Warning Count becomes zero. | Programs | Minimum CGPA required to avoid Warning |",
+                "source": "grading-page.html",
+                "section": "Warning/Probation",
+                "page": 1,
+                "score": 0.8041,
+                "doc_id": "grading-page.html",
+                "doc_version": "2026",
+                "superseded": false
+            },
+            {
+                "chunk_id": "prospectus-2026-academic-rules-and-regulations-pdf-0005",
+                "text": "[prospectus-2026-academic-rules-and-regulations.pdf | 13. Registration of Students under]\nThe following honours are stated withdraw from any course in the Warning on the degree issued to such high first semester. a) Must register for all such courses, achievers. b) Application for withdrawal from in which the grade was F or U. course(s) must be countersigned CGPA 3.90 to 4.00 Summa Cum Laude b) Should register for all such by the parent or the guardian of CGPA 3.75 to 3.89 M agna Cum Laude courses, in which the grade was D, the student. CGPA 3.60 to 3.74 Cum Laude D+ or C-. c) Request for withdrawal must be c) Should not register for more than submitted to the Head of 11. Academic Warning/Probation five courses. Department (HOD) before the last a) At the end of every semester d) Students with warning count = 2 day of classes. (including summer semester), MUST not register for a new d) Request to withdraw from a warning is issued if the CGPA of a course. course requires approval of the student is less than the minimum e) Parents/guardians are called to HOD. required for graduation. the campus for a consultative e) For courses having an associated Minimum CGPA required to avoid meeting with the HOD. lab, withdrawal is always from academic warning: f) Must obtain written approval both theory and lab portions of BS/BBA programs 2.00 from their Head of Department the course. MS/MBA programs 2.50 for each course that they register, f) Fee is not refunded for withdrawn PhD programs 3.00 add, drop or withdraw. course. g) Students studying under 218 Prospectus 2026 | FAST-NUCES Academic Rules & Regulations 17. Repeating a Course any of the above four 20. Transfer of Students between A student must repeat all failed categories Campuses courses.",
+                "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+                "section": "13. Registration of Students under",
+                "page": 2,
+                "score": 0.7717,
+                "doc_id": "prospectus-2026-academic-rules-and-regulations.pdf",
+                "doc_version": "2026",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0088",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 3.28 If the CGPA of an undergraduate student fall below the]\nfull details to the Controller of Examinations for approval. acceptable threshold of 2.00 for third consecutive semester, then his/her admission is closed. Transfer to another FAST-NUCES campus",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "3.28 If the CGPA of an undergraduate student fall below the",
+                "page": 17,
+                "score": 0.7554,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            }
+        ],
+        "citations": [
+            {
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Academic Warning/Probation",
+                "page": 24
+            }
+        ],
+        "human_label": 1,
+        "human_reason": "Supported: chunk 0117 (p.24, clause 5.4) states minimum CGPA to avoid warning is 2.00, and that chunk is cited."
+    },
+    {
+        "trace_id": "7d08ec6cc9fb4e1da078fa0eb4ae3e41",
+        "question": "What is the maximum time allowed to complete a bachelor's degree?",
+        "answer": "6 years",
+        "context": [
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0052",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 1.23 The minimum duration of a Bachelor’s degree is four]\nacademic years (8 regular semesters) and a maximum time limit of 6 years, further extendable for one year with the approval of Statutory Bodies.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "1.23 The minimum duration of a Bachelor’s degree is four",
+                "page": 10,
+                "score": 0.8646,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0058",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 1.23 The minimum duration of a Bachelor’s degree is four]\nacademic years (8 regular semesters) and a maximum time limit of 6 years, further extendable for one year with the approval of Statutory Bodies.",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "1.23 The minimum duration of a Bachelor’s degree is four",
+                "page": 11,
+                "score": 0.8646,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0053",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 1.24 When a student is readmitted with credit exemptions from a]\nprevious admission, the maximum duration allowed to complete the degree will be counted from the date of first admission. 1.25 Minimum Cumulative Grade Point Average (CGPA) of 2.00 is required for graduation. | 4 | Undergraduate Academic Rules and Regulations 2026 |",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "1.24 When a student is readmitted with credit exemptions from a",
+                "page": 10,
+                "score": 0.7629,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0059",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 1.24 When a student is readmitted with credit exemptions from a]\nprevious admission, the maximum duration allowed to complete the degree will be counted from the date of first admission. 1.25 Minimum Cumulative Grade Point Average (CGPA) of 2.00 is required for graduation. | Grade | Interpretation | | A+ | Outstanding | | A, A- | Excellent | | B+, B, B- | Good | | C+, C | Adequate | | C-, D+, D | Pass, the student may repeat the course | | F | Fail | | FA | Fail due to shortage of attendance | | I | Incomplete | | W | Withdrawn | | S | Satisfactory | | U | Unsatisfactory | | | U ndergraduate Academic Rules and Regulations 2026 | 5 |",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "1.24 When a student is readmitted with credit exemptions from a",
+                "page": 11,
+                "score": 0.7574,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "prospectus-2026-academic-rules-and-regulations-pdf-0015",
+                "text": "[prospectus-2026-academic-rules-and-regulations.pdf | Degree Program]\nper HEC guidelines, the years with at-least B grade campus, students must abide by maximum period allowed to fulfil are transferable. the rules and regulations of the degree requirements is given I) CGPA earned at the previous University and to follow a code of below: institution is not transferred, conduct. Students are expected BS/BBA programs Six (6)* years while transferring courses. to observe disciplinary MBA programs Three (3) years j) MS Thesis credits are not standards of the University in all MS programs Four (4) years transferable. their dealings. Failure to do so PhD programs Eight (8) years shall require appearance before 31. Pre-Medical students a disciplinary committee. The *Further extendable for one year with transferring from other committee shall recommend the approval of Statutory Bodies universities to FAST-NUCES suitable action against the Extensions will only be granted for Pre-Medical students from other student. The action may amount genuine and unavoidable universities must submit proof of to imposition of fine, suspension, circumstances that have prevented having passed an additional expulsion, or disqualification of student from timely completing their Mathematical course, along with a student from any academic degree such as Iddat, Maternity, the detailed course content honour such as award of a Death in the immediate family (syllabus) of that course to the medal, scholarship, etc. The member and medical condition. respective campus. The following will call for disciplinary admission at FAST-NUCES shall action. When a student is readmitted with be subject to assessment of a) Disregard or disobedience of credit exemptions from a previous submitted documents by the rules of the University admission, the maximum duration Admission Committee.",
+                "source": "prospectus-2026-academic-rules-and-regulations.pdf",
+                "section": "Degree Program",
+                "page": 4,
+                "score": 0.7395,
+                "doc_id": "prospectus-2026-academic-rules-and-regulations.pdf",
+                "doc_version": "2026",
+                "superseded": false
+            }
+        ],
+        "citations": [
+            {
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "1.23 The minimum duration of a Bachelor’s degree is four",
+                "page": 11
+            }
+        ],
+        "human_label": 1,
+        "human_reason": "Supported: chunk 0052/0058 (clause 1.23) states a maximum time limit of 6 years; cited chunk matches."
+    }
+]

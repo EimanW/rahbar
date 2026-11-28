@@ -1,0 +1,68 @@
+[
+    {
+        "trace_id": "d49eca7ceedc4720a06261737fc8b09f",
+        "question": "What will the tuition fee per credit hour be in 2028?",
+        "answer": "The tuition fee per credit hour for the academic year 2026-27 is Rs. 12,000.",
+        "context": [
+            {
+                "chunk_id": "fee-structure-page-html-0004",
+                "text": "[fee-structure-page.html | Tuition Fee (w.e.f. Fall 2026 semester)]\nTuition Fee is payable in full before the start of each semester. Annual revision will be applicable as per University Internal Rules. For the academic year 2026-27 the tuition fee per credit hour applicable to all batches is as follows: | Program | Fee | | BBA / BS | Rs. 12,000 | | MBA / MS | Rs. 12,000 | | PhD | Rs. 12,000 |",
+                "source": "fee-structure-page.html",
+                "section": "Tuition Fee (w.e.f. Fall 2026 semester)",
+                "page": 1,
+                "score": 0.7954,
+                "doc_id": "fee-structure-page.html",
+                "doc_version": "2026-27",
+                "superseded": false
+            },
+            {
+                "chunk_id": "student-handbook-jun-2026-pdf-0049",
+                "text": "[student-handbook-jun-2026.pdf | Internal Scholarships]\nfor full tuition fee. undergraduate degree and 2.5 for graduate degree. A student registering for less or more credit hours than the total The repayment of loan starts three months after graduation or specified number of credit hours shall not be eligible for Merit getting a job, whichever is earlier. The total amount must be Scholarship. Student must not have failed, repeated or repaid within a period of four years after graduation. Students are withdrawn from a course in that semester required to sign to this effect. If there are more than one student in the same position, the next All those who are admitted and are in real need of financial position will automatically be vanished or moved down assistance should apply on the prescribed Financial Aid form. A depending on the number of students in one position. notice to this effect will be posted on the notice board. | 10 | Student Handbook 2026 | |",
+                "source": "student-handbook-jun-2026.pdf",
+                "section": "Internal Scholarships",
+                "page": 18,
+                "score": 0.6822,
+                "doc_id": "student-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0053",
+                "text": "[academic-rules-handbook-jun-2026.pdf | 1.24 When a student is readmitted with credit exemptions from a]\nprevious admission, the maximum duration allowed to complete the degree will be counted from the date of first admission. 1.25 Minimum Cumulative Grade Point Average (CGPA) of 2.00 is required for graduation. | 4 | Undergraduate Academic Rules and Regulations 2026 |",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "1.24 When a student is readmitted with credit exemptions from a",
+                "page": 10,
+                "score": 0.6709,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0022",
+                "text": "[academic-rules-handbook-jun-2026.pdf | Credit Hour]\nPrivacy & Data Security 47 Training & Support 47 1.7 1-credit hour implies teaching a theory course for one Monitoring & Compliance 48 classroom-teaching hour each week throughout the semester. Review & Revision 49",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Credit Hour",
+                "page": 6,
+                "score": 0.6706,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            },
+            {
+                "chunk_id": "academic-rules-handbook-jun-2026-pdf-0032",
+                "text": "[academic-rules-handbook-jun-2026.pdf | Credit Hour]\nPrivacy & Data Security 47 Training & Support 47 1.7 1-credit hour implies teaching a theory course for one Monitoring & Compliance 48 classroom-teaching hour each week throughout the semester. Review & Revision 49",
+                "source": "academic-rules-handbook-jun-2026.pdf",
+                "section": "Credit Hour",
+                "page": 7,
+                "score": 0.6706,
+                "doc_id": "academic-rules-handbook-jun-2026.pdf",
+                "doc_version": "2026-06",
+                "superseded": false
+            }
+        ],
+        "citations": [],
+        "answered_from_context": false,
+        "human_label": 1,
+        "human_reason": "Faithful: the only claim (2026-27 fee is Rs. 12,000 per credit hour) is stated in chunk fee-structure-page-html-0004. It correctly does not invent a 2028 figure and answered_from_context is false, so the refusal is justified, but it should say plainly that 2028 fees are not published and it gives no citation for the 2026-27 fact."
+    }
+]

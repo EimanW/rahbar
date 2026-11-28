@@ -1,0 +1,11 @@
+data:
+  CORPUS_DIR: /batch_b
+  CHROMA_COLLECTION: rahbar-nomic
+  EMBED_MODEL: nomic-embed-text
+  LLM_PROVIDER: ollama-host
+  LLM_MODEL: llama3.2:3b
+  RELEVANCE_FLOOR: "0.665"
+  CHUNK_SIZE: "300"
+  CHUNK_OVERLAP: "50"
+  CACHE_THRESHOLD: "0.94"
+  OLLAMA_URL: http://host.minikube.internal:11434
