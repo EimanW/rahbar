@@ -49,13 +49,18 @@ def reject_instructions(passages, relevance_floor, actions):
     for passage in passages:
         if _INSTRUCTION.search(passage.text):
             actions.append({"action": "drop_injected_chunk", "chunk_id": passage.chunk_id,
-                            "doc_id": passage.doc_id, "source": passage.source})
+                            "doc_id": passage.doc_id or passage.source, "source": passage.source})
         elif passage.score >= relevance_floor:
             context.append(passage)
     return context
 
 
 def write_trace(record):
+    for key in ("retrieved", "context"):
+        for passage in record.get(key, []):
+            if not passage.get("doc_id"):
+                passage["doc_id"] = passage.get("source")
+
     line = json.dumps(record, ensure_ascii=True)
     print(line, flush=True)
     target = os.environ.get("TRACE_FILE")
