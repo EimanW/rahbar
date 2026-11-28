@@ -141,8 +141,7 @@ for run in ("first", "second", "noise"):
     scores = []
 
     for row in result[run]["rows"]:
-        if not row.get("answered"):
-            continue
+
 
         tid = row["trace_id"]
 
@@ -214,3 +213,4 @@ destination.write_text(
 print("HUMAN AGREEMENT:")
 print(json.dumps(result["judge_agreement"], indent=2))
 print("RESULT SAVED:", destination)
+
