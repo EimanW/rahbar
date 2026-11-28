@@ -1,4 +1,6 @@
 ﻿import sys
+import os
+import httpx
 import json
 import time
 import math
@@ -49,7 +51,21 @@ unrelated = [
     "Bees produce honey"
 ]
 
+MODEL = os.environ.get("EMBED_MODEL", "hash-bow-768")
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
+
 def embed(text):
+    if MODEL == "nomic-embed-text":
+        response = httpx.post(
+            OLLAMA_URL + "/api/embed",
+            json={
+                "model": MODEL,
+                "input": "search_query: " + text
+            },
+            timeout=120
+        )
+        response.raise_for_status()
+        return response.json()["embeddings"][0]
     return hash_embed(text, 768)
 
 def cosine(a, b):
@@ -91,7 +107,7 @@ def evaluate():
     neg = statistics.mean(p["cosine"] for p in negative)
 
     return {
-        "model": "hash-bow-768",
+        "model": MODEL,
         "paraphrase_pairs": len(positive),
         "unrelated_pairs": len(negative),
         "mean_paraphrase_similarity": pos,
@@ -140,3 +156,4 @@ for k in keys:
 print("\nREPEATABILITY DIFFERENCE")
 print(json.dumps(result["repeat_delta"],indent=2))
 print("\nRESULT SAVED:",path)
+

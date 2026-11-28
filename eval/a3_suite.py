@@ -1,4 +1,4 @@
-import os
+﻿import os
 import json
 import math
 import time
@@ -24,7 +24,7 @@ def mean(values):
 
 def evaluate(noise=False):
     rows = []
-    with httpx.Client(timeout=60) as client:
+    with httpx.Client(timeout=300) as client:
         for q in questions:
             question = q["question"]
             if noise:
@@ -123,6 +123,19 @@ def difference(a, b):
 print("RUN 1: BASELINE")
 first = evaluate()
 
+checkpoint = HERE / "results"
+checkpoint.mkdir(exist_ok=True)
+stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+checkpoint_path = checkpoint / f"baseline-checkpoint-{stamp}.json"
+
+checkpoint_path.write_text(
+    json.dumps({"seed": 42, "first": first}, indent=2),
+    encoding="utf-8"
+)
+
+print("BASELINE SAVED:", checkpoint_path, flush=True)
+print(json.dumps(first["metrics"], indent=2), flush=True)
+
 print("RUN 2: REPEATABILITY")
 second = evaluate()
 
@@ -153,4 +166,6 @@ print(json.dumps(result["repeat_delta"], indent=2))
 print("\nNOISE DIFFERENCE")
 print(json.dumps(result["noise_delta"], indent=2))
 print("\nRESULT SAVED:", path)
+
+
 
