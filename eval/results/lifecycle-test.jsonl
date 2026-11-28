@@ -1,0 +1,23 @@
+﻿TEST 1: INITIAL INDEX
+{"event": "incremental_document", "doc_id": "a.txt", "status": "new", "chunks": 1, "embedded_chunks": 1}
+{"event": "incremental_document", "doc_id": "b.txt", "status": "new", "chunks": 1, "embedded_chunks": 1}
+{"event": "incremental_summary", "embedded_chunks": 2, "total_chunks": 2, "unchanged_documents": 0, "deleted_documents": 0, "orphan_chunks": 0}
+TEST 2: UNCHANGED DOCUMENTS
+{"event": "incremental_document", "doc_id": "a.txt", "status": "unchanged", "chunks": 1, "embedded_chunks": 0}
+{"event": "incremental_document", "doc_id": "b.txt", "status": "unchanged", "chunks": 1, "embedded_chunks": 0}
+{"event": "incremental_summary", "embedded_chunks": 0, "total_chunks": 2, "unchanged_documents": 2, "deleted_documents": 0, "orphan_chunks": 0}
+TEST 3: CHANGED DOCUMENT
+{"event": "incremental_document", "doc_id": "a.txt", "status": "unchanged", "chunks": 1, "embedded_chunks": 0}
+{"event": "incremental_document", "doc_id": "b.txt", "status": "changed", "chunks": 1, "embedded_chunks": 1}
+{"event": "incremental_summary", "embedded_chunks": 1, "total_chunks": 2, "unchanged_documents": 1, "deleted_documents": 0, "orphan_chunks": 0}
+TEST 4: DELETED DOCUMENT
+{"event": "incremental_document", "doc_id": "a.txt", "status": "unchanged", "chunks": 1, "embedded_chunks": 0}
+{"event": "incremental_document", "doc_id": "b.txt", "status": "deleted", "removed_chunks": 1, "embedded_chunks": 0}
+{"event": "incremental_summary", "embedded_chunks": 0, "total_chunks": 1, "unchanged_documents": 1, "deleted_documents": 1, "orphan_chunks": 0}
+DELETED DOCUMENT ORPHAN COUNT: 0
+TEST 5: RESTORE DOCUMENT
+{"event": "incremental_document", "doc_id": "a.txt", "status": "unchanged", "chunks": 1, "embedded_chunks": 0}
+{"event": "incremental_document", "doc_id": "b.txt", "status": "new", "chunks": 1, "embedded_chunks": 1}
+{"event": "incremental_summary", "embedded_chunks": 1, "total_chunks": 2, "unchanged_documents": 1, "deleted_documents": 0, "orphan_chunks": 0}
+RESTORATION: PASS
+LIFECYCLE TEST COMPLETED
